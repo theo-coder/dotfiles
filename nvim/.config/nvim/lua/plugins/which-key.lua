@@ -58,7 +58,7 @@ return {
 				n = { "<cmd>Gitsigns next_hunk<cr>", "[GIT] Next hunk" },
 				p = { "<cmd>Gitsigns prev_hunk<cr>", "[GIT] Prev hunk" },
 				f = { "<cmd>Telescope git_status<cr>", "[GIT] Files status" },
-				c = { "<cmd>Telescope git_commits<cr>", "[GIT] Commits" },
+				c = { "<cmd>Telescope conventional_commits<cr>", "[GIT] Commits" },
 				b = { "<cmd>Telescope git_branches<cr>", "[GIT] Branches" },
 			},
 			b = {

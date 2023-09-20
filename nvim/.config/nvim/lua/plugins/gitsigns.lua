@@ -2,8 +2,7 @@ local icons = require("utils.icons").ui
 
 return {
 	"lewis6991/gitsigns.nvim",
-	event = "User FileOpened",
-	cmd = "Gitsigns",
+	event = "BufReadPre",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},

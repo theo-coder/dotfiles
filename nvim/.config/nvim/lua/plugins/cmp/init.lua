@@ -8,11 +8,26 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
+			"petertriho/cmp-git",
 		},
-		config = function()
+		opts = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local icons = require("utils.icons")
+			local compare = require("cmp.config.compare")
+
+			local source_names = {
+				nvim_lsp = "(LSP)",
+				luasnip = "(Snippet)",
+				buffer = "(Buffer)",
+				path = "(Path)",
+			}
+			local duplicates = {
+				buffer = 1,
+				path = 1,
+				nvim_lsp = 0,
+				luasnip = 1,
+			}
 
 			local has_words_before = function()
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -20,19 +35,32 @@ return {
 					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 			end
 
-			cmp.setup({
+			return {
 				completion = {
 					completeopt = "menu,menuone,noinsert",
 				},
+				sorting = {
+					priority_weight = 2,
+					comparators = {
+						compare.score,
+						compare.recently_used,
+						compare.offset,
+						compare.exact,
+						compare.kind,
+						compare.sort_text,
+						compare.length,
+						compare.order,
+					},
+				},
 				snippet = {
 					expand = function(args)
-						luasnip.lsp_expand(args.body)
+						require("luasnip").lsp_expand(args.body)
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<cr>"] = cmp.mapping.confirm({ select = true }),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
@@ -55,28 +83,16 @@ return {
 					end, { "i", "s", "c" }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp_signature_help" },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
+					{ name = "nvim_lsp", group_index = 1 },
+					{ name = "luasnip", group_index = 1 },
+					{ name = "buffer", group_index = 2 },
+					{ name = "path", group_index = 2 },
+					{ name = "git", group_index = 2 },
+					{ name = "orgmode", group_index = 2 },
 				}),
 				formatting = {
-					fields = { "kind", "abbr", "menu" },
 					format = function(entry, item)
-						local max_width = 0
-						local source_names = {
-							nvim_lsp = "(LSP)",
-							path = "(Path)",
-							luasnip = "(Snippet)",
-							buffer = "(Buffer)",
-						}
-						local duplicates = {
-							buffer = 1,
-							path = 1,
-							nvim_lsp = 0,
-							luasnip = 1,
-						}
+						local max_width = 80
 						local duplicates_default = 0
 						if max_width ~= 0 and #item.abbr > max_width then
 							item.abbr = string.sub(item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
@@ -84,10 +100,22 @@ return {
 						item.kind = icons.kind[item.kind]
 						item.menu = source_names[entry.source.name]
 						item.dup = duplicates[entry.source.name] or duplicates_default
+
 						return item
 					end,
 				},
-			})
+				window = {
+					documentation = {
+						border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+						winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
+					},
+				},
+			}
+		end,
+		config = function(_, opts)
+			local cmp = require("cmp")
+
+			cmp.setup(opts)
 
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
@@ -104,19 +132,71 @@ return {
 					{ name = "cmdline" },
 				}),
 			})
+
+			-- Auto pairs
+			local has_autopairs, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+			if has_autopairs then
+				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+			end
+
+			-- Git
+			require("cmp_git").setup({ filetypes = { "NeogitCommitMessage" } })
 		end,
 	},
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
-			end,
+			{
+				"rafamadriz/friendly-snippets",
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+				end,
+			},
+			{
+				"honza/vim-snippets",
+				config = function()
+					require("luasnip.loaders.from_snipmate").lazy_load()
+
+					-- One peculiarity of honza/vim-snippets is that the file with the global snippets is _.snippets, so global snippets
+					-- are stored in `ls.snippets._`.
+					-- We need to tell luasnip that "_" contains global snippets:
+					require("luasnip").filetype_extend("all", { "_" })
+				end,
+			},
 		},
-		config = {
-			history = true,
-			delete_check_events = "TextChanged",
-		},
+		build = "make install_jsregexp",
+		opts = function()
+			local types = require("luasnip.util.types")
+			return {
+				history = true,
+				delete_check_events = "TextChanged",
+
+				-- Display a cursor-like placeholder in unvisited nodes of the snippet.
+				ext_opts = {
+					[types.insertNode] = {
+						unvisited = {
+							virt_text = { { "|", "Conceal" } },
+							-- virt_text_pos = "inline",
+						},
+					},
+					[types.exitNode] = {
+						unvisited = {
+							virt_text = { { "|", "Conceal" } },
+							-- virt_text_pos = "inline",
+						},
+					},
+				},
+			}
+		end,
+		config = function(_, opts)
+			require("luasnip").setup(opts)
+
+			local snippets_folder = string.format("%s/.config/nvim/lua/plugins/cmp/snippets/", vim.env.HOME)
+			require("luasnip.loaders.from_lua").lazy_load({ paths = snippets_folder })
+
+			vim.api.nvim_create_user_command("LuaSnipEdit", function()
+				require("luasnip.loaders.from_lua").edit_snippet_files()
+			end, {})
+		end,
 	},
 }

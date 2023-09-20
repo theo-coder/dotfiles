@@ -16,5 +16,6 @@ table.insert(plugins, require("plugins.comment"))
 table.insert(plugins, require("plugins.project"))
 table.insert(plugins, require("plugins.colorizer"))
 table.insert(plugins, require("plugins.statusline"))
+table.insert(plugins, require("plugins.db"))
 
 return plugins

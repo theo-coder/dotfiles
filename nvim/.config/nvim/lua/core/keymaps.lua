@@ -17,7 +17,6 @@ function M:load()
 	keymap("n", "<leader>y", [["+y]], opts) -- copy to system clipboard
 	keymap("n", "<leader>Y", [["+Y]], opts)
 	keymap("n", "Q", "nop", opts) -- unmap key
-	keymap("n", "f", ":Format<cr>", opts) -- format current buffer
 	keymap("n", "<C-k>", ":cnext<cr>zz", opts) -- next error
 	keymap("n", "<C-j>", ":cprev<cr>zz", opts) -- previous error
 	keymap("n", "<leader>k", ":lnext<cr>zz", opts)
