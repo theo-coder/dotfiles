@@ -31,6 +31,7 @@ function M:load()
 		shell = "/bin/bash", -- shell to use for ! commands
 		wrap = false, -- display lines as one long line
 		cursorline = true, -- display a line under cursor
+		timeoutlen = 300, -- time for WK to appears
 	}
 
 	for k, v in pairs(options) do

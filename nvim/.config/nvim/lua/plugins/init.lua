@@ -1,8 +1,6 @@
-local plugins = {
-	{ "nacro90/numb.nvim", event = "BufReadPre", config = true },
-}
+local plugins = {}
 
-table.insert(plugins, require("plugins.lazy"))
+table.insert(plugins, require("plugins.others"))
 table.insert(plugins, require("plugins.nightfox"))
 table.insert(plugins, require("plugins.alpha"))
 table.insert(plugins, require("plugins.cmp"))

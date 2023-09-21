@@ -68,13 +68,6 @@ return {
 				q = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
 				Q = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
 			},
-			t = {
-				name = "TABS",
-				c = { "<cmd>tabnew<cr>", "[TABS] New tab" },
-				n = { "<cmd>tabnext<cr>", "[TABS] Next tab" },
-				p = { "<cmd>tabprevious<cr>", "[TABS] Previous tab" },
-				q = { "<cmd>tabclose<cr>", "[TABS] Close current tab" },
-			},
 		}, {
 			mode = "n",
 			prefix = "<leader>",

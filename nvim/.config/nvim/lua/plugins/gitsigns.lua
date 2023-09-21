@@ -22,13 +22,13 @@ return {
 			},
 			delete = {
 				hl = "GitSignsDelete",
-				text = icons.Triangle,
+				text = icons.BoldLineLeft,
 				numhl = "GitSignsDeleteNr",
 				linehl = "GitSignsDeleteLn",
 			},
 			topdelete = {
 				hl = "GitSignsDelete",
-				text = icons.Triangle,
+				text = icons.BoldLineLeft,
 				numhl = "GitSignsDeleteNr",
 				linehl = "GitSignsDeleteLn",
 			},
