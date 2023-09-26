@@ -35,6 +35,14 @@ function M:load()
 				end,
 			},
 		},
+		{
+			"CursorHold",
+			{
+				callback = function()
+					vim.schedule(vim.diagnostic.open_float)
+				end,
+			},
+		},
 	}
 
 	for _, entry in ipairs(autocmds) do

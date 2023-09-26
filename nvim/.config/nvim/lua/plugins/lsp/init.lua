@@ -59,6 +59,32 @@ return {
 					},
 				},
 				taplo = {},
+				html = {
+					filetypes = {
+						"html",
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+					},
+				},
+				emmet_ls = {
+					init_options = {
+						html = {
+							options = {
+								["bem.enabled"] = true,
+							},
+						},
+					},
+				},
+				cssls = {},
+				eslint = {
+					settings = {
+						workingDirectory = { mode = "auto" },
+					},
+				},
 			},
 			setup = {
 				rust_analyzer = function(_, opts)
