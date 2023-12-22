@@ -1,0 +1,4 @@
+---
+- name: Dotfiles Config
+  hosts: localhost
+  connection: local
