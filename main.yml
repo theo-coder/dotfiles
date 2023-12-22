@@ -2,3 +2,8 @@
 - name: Dotfiles Config
   hosts: localhost
   connection: local
+
+  tasks:
+    - name: test
+      ansible.builtin.debug:
+        msg: System {{ git_user_email }}
