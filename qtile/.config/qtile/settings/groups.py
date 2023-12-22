@@ -3,7 +3,6 @@ from libqtile.config import Group
 group_names = ["ampersand", "eacute", "quotedbl", "apostrophe",
                "parenleft", "minus", "egrave", "underscore", "ccedilla"]
 
-
 def init_groups():
     return [
         Group(
@@ -66,7 +65,7 @@ def init_groups():
             name="underscore",
             layout="monadtall",
             label="8",
-            layout_opts=None,
+            layout_opts={"margin": 50},
             screen_affinity=None,
             spawn=None
         ),

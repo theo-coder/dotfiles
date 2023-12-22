@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"windwp/nvim-ts-autotag",
+		"IndianBoy42/tree-sitter-just",
 	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
@@ -33,6 +34,16 @@ return {
 			},
 			autotag = { enable = true },
 		})
+
+		require("tree-sitter-just").setup({})
+
+		-- require("nvim-treesitter.parsers").get_parser_configs().just = {
+		-- 	install_info = {
+		-- 		url = "https://github.com/IndianBoy42/tree-sitter-just",
+		-- 		files = { "src/parser.c", "src/scanner.cc" },
+		-- 		branch = "main",
+		-- 	},
+		-- }
 
 		vim.wo.foldmethod = "expr"
 		vim.wo.foldexpr = "nvim-treesitter#foldexpr()"

@@ -25,6 +25,11 @@ def init_keybindings(groups):
         Key([META, CTRL], "r", lazy.restart()),
     ]
 
+    # scratchpads = [
+    #     Key([META, CTRL], RETURN,
+    #         lazy.group["terminal"].dropdown_toggle('term')),
+    # ]
+
     windows = [
         # Kill focused window
         Key([META, SHIFT], "q", lazy.window.kill()),
@@ -42,9 +47,10 @@ def init_keybindings(groups):
         # Launch browser
         Key([META], "b", lazy.spawn(BROWSER)),
         # Show power menu
-        Key([META, SHIFT], "e", lazy.spawn("powermenu")),
+        Key([META, SHIFT], "e", lazy.spawn("/home/theo/.local/bin/powermenu")),
         # Run launcher
-        Key([META, SHIFT], RETURN, lazy.spawn("applauncher")),
+        Key([META, SHIFT], RETURN, lazy.spawn(
+            "/home/theo/.local/bin/applauncher")),
         # Run promp widget
         Key([META], "r", lazy.spawncmd())
     ]
@@ -89,4 +95,4 @@ def init_keybindings(groups):
             ]
         )
 
-    return essentials + windows + programs + navigation + medias
+    return essentials + windows + programs + navigation + medias  # + scratchpads

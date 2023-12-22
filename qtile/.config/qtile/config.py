@@ -20,11 +20,11 @@ focus_on_window_activation = "smart"
 auto_minimize = False
 
 colors = colors
+layouts = init_layouts()
+floating_layout = init_floating_layout()
 groups = init_groups()
 keys = init_keybindings(groups=groups)
 mouse = init_mouse()
-layouts = init_layouts()
-floating_layout = init_floating_layout()
 widget_defaults = bar_defaults.copy()
 screens = init_screens()
 
@@ -34,7 +34,9 @@ main = None
 @hook.subscribe.client_new
 def assign_app_group(client):
     wm_class_default_group = {
-        "discord": group_names[5]
+        "discord": group_names[5],
+        "notion": group_names[7],
+        "obsidian": group_names[4]
     }
 
     wm_name_default_group = {
@@ -45,13 +47,11 @@ def assign_app_group(client):
     wm_class = wm_class[0].lower() if len(wm_class) else ""
 
     if wm_class in wm_class_default_group:
-        group = wm_class_default_group[wm_class]
+        client.togroup(wm_class_default_group[wm_class])
 
     wm_name = client.name.lower()
     if wm_name in wm_name_default_group:
-        group = wm_name_default_group[wm_name]
-
-    client.togroup(group)
+        client.togroup(wm_name_default_group[wm_name])
 
 
 @hook.subscribe.startup_once

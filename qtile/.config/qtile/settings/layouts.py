@@ -37,6 +37,8 @@ def init_floating_layout():
         Match(wm_class="notification"),
         Match(wm_class="splash"),
         Match(wm_class="toolbar"),
+        Match(wm_class="obsidian"),
+        Match(wm_class="svelte-tauri"),
     ]
 
     return layout.Floating(

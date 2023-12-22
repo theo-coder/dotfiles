@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+xrdb -merge ~/.Xresources
+xmodmap ~/.Xmodmap
 lxsession &
-picom &
-sleep 2 && nm-applet &
-sleep 2 && udiskie &
+nm-applet &
+udiskie &
 xfce4-power-manager &
-sleep 2 && volumeicon &
+pa-applet &
 flameshot &
-sleep 2 && blueberry-tray &
+blueberry-tray &
+dunst &
 xwallpaper --stretch ~/Images/wallpapers/001.jpg &
