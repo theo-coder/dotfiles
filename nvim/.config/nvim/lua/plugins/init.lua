@@ -1,20 +1,58 @@
-local plugins = {}
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
 
-table.insert(plugins, require("plugins.others"))
-table.insert(plugins, require("plugins.nightfox"))
-table.insert(plugins, require("plugins.alpha"))
-table.insert(plugins, require("plugins.cmp"))
-table.insert(plugins, require("plugins.lsp"))
-table.insert(plugins, require("plugins.treesitter"))
-table.insert(plugins, require("plugins.telescope"))
-table.insert(plugins, require("plugins.autopairs"))
-table.insert(plugins, require("plugins.gitsigns"))
-table.insert(plugins, require("plugins.which-key"))
-table.insert(plugins, require("plugins.comment"))
-table.insert(plugins, require("plugins.project"))
-table.insert(plugins, require("plugins.colorizer"))
-table.insert(plugins, require("plugins.statusline"))
-table.insert(plugins, require("plugins.db"))
-table.insert(plugins, require("plugins.filetype"))
+local plugins = {
+	require("plugins.colorscheme"),
+	require("plugins.treesitter"),
+	require("plugins.lsp"),
+	require("plugins.win_bar"),
+	require("plugins.status_line"),
+	require("plugins.autopairs"),
+	require("plugins.colorizer"),
+	require("plugins.comment"),
+	require("plugins.telescope"),
+	require("plugins.git"),
+	require("plugins.format"),
+	{
+		"rcarriga/nvim-notify",
+		event = "VeryLazy",
+		config = function()
+			vim.notify = require("notify")
+		end,
+	},
+	{
+		"andymass/vim-matchup",
+		event = "BufReadPost",
+		config = function()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+		end,
+	},
+	{
+		"kylechui/nvim-surround",
+		event = "BufReadPre",
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("todo-comments").setup({})
+		end,
+	},
+}
 
-return plugins
+require("lazy").setup(plugins)

@@ -2,7 +2,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy",
 	config = function()
-		local components = require("plugins.statusline.components")
+		local components = require("plugins.status_line.components")
 
 		require("lualine").setup({
 			options = {
@@ -11,10 +11,9 @@ return {
 				component_separators = {},
 				section_separators = {},
 				disabled_filetypes = {
-					statusline = { "alpha", "lazy" },
+					statusline = { "lazy" },
 					winbar = {
 						"help",
-						"alpha",
 						"lazy",
 					},
 				},

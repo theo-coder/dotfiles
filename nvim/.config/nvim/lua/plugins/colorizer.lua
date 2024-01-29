@@ -1,21 +1,6 @@
 return {
 	"NvChad/nvim-colorizer.lua",
-	event = "BufReadPre",
-	opts = {
-		filetypes = { "*", "!prompt", "!popup" },
-		user_default_options = {
-			RGB = true,
-			RRGGBB = true,
-			names = false,
-			RRGGBBAA = true,
-			AARRGGBB = true,
-			rgb_fn = true,
-			hsl_fn = true,
-			css = false,
-			css_fn = false,
-			mode = "background",
-			tailwind = true,
-		},
-		buftypes = {},
-	},
+	config = function()
+		require("colorizer").setup({})
+	end,
 }

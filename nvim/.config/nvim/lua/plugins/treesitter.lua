@@ -1,51 +1,48 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	build = ":TSUpdate",
 	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		"windwp/nvim-ts-autotag",
-		"IndianBoy42/tree-sitter-just",
+		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "lua", "rust", "toml" },
+			ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+
 			auto_install = true,
+
 			highlight = {
 				enable = true,
-				additional_vim_regex_highlighting = false,
 			},
-			indent = { enable = true },
-			rainbow = {
+
+			incremental_selection = {
 				enable = true,
-				extended_mode = true,
-				max_file_lines = nil,
-			},
-			context_commentstring = {
-				enable = true,
-				enable_autocmd = false,
-				config = {
-					typescript = "// %s",
-					css = "/* %s */",
-					scss = "/* %s */",
-					html = "<!-- %s -->",
-					svelte = "<!-- %s -->",
-					vue = "<!-- %s -->",
-					json = "",
+				keymaps = {
+					init_selection = "<leader>ss",
+					node_incremental = "<leader>si",
+					scope_incremental = "<leader>sc",
+					node_decremental = "<leader>sd",
 				},
 			},
-			autotag = { enable = true },
+
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+						["as"] = { query = "@scope", query_group = "locals", desc = "select language scope" },
+					},
+					selection_modes = {
+						["@parameter.outer"] = "v",
+						["@function.outer"] = "v",
+						["@class.outer"] = "<c-v>",
+					},
+					include_surrounding_whitespace = true,
+				},
+			},
 		})
-
-		require("tree-sitter-just").setup({})
-
-		-- require("nvim-treesitter.parsers").get_parser_configs().just = {
-		-- 	install_info = {
-		-- 		url = "https://github.com/IndianBoy42/tree-sitter-just",
-		-- 		files = { "src/parser.c", "src/scanner.cc" },
-		-- 		branch = "main",
-		-- 	},
-		-- }
-
-		vim.wo.foldmethod = "expr"
-		vim.wo.foldexpr = "nvim-treesitter#foldexpr()"
 	end,
 }
