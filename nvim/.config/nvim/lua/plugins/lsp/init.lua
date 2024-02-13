@@ -37,7 +37,7 @@ return {
 			vim.keymap.set("n", "gK", vim.lsp.buf.signature_help)
 			vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
 			vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
 
 			local cmp = require("cmp")
 			local ls = require("luasnip")

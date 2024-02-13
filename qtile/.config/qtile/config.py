@@ -36,7 +36,8 @@ def assign_app_group(client):
     wm_class_default_group = {
         "discord": group_names[5],
         "notion": group_names[7],
-        "obsidian": group_names[4]
+        "obsidian": group_names[4],
+        "xterm": group_names[8]
     }
 
     wm_name_default_group = {
