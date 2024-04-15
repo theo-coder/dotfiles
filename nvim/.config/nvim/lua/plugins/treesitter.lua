@@ -3,10 +3,16 @@ return {
 	build = ":TSUpdate",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"windwp/nvim-ts-autotag",
+		"JoosepAlviste/nvim-ts-context-commentstring",
 	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+
+			autotag = {
+				enable = true,
+			},
 
 			auto_install = true,
 
@@ -41,6 +47,19 @@ return {
 						["@class.outer"] = "<c-v>",
 					},
 					include_surrounding_whitespace = true,
+				},
+			},
+
+			context_commentstring = {
+				config = {
+					javascript = {
+						__default = "// %s",
+						jsx_element = "{/* %s */}",
+						jsx_fragment = "{/* %s */}",
+						jsx_attribute = "// %s",
+						comment = "// %s",
+					},
+					typescript = { __default = "// %s", __multiline = "/* %s */" },
 				},
 			},
 		})

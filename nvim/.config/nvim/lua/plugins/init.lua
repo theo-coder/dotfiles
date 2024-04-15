@@ -23,6 +23,7 @@ local plugins = {
 	require("plugins.telescope"),
 	require("plugins.git"),
 	require("plugins.format"),
+	require("plugins.lint"),
 	{
 		"rcarriga/nvim-notify",
 		event = "VeryLazy",

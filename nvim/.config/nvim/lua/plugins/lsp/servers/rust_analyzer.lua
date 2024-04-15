@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M.setup = function()
 	require("lspconfig").rust_analyzer.setup({
 		settings = {
 			["rust-analyzer"] = {
@@ -11,3 +13,5 @@ return function()
 		},
 	})
 end
+
+return M

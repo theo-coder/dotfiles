@@ -1,11 +1,15 @@
-return function()
+local M = {}
+
+M.setup = function()
 	require("lspconfig").lua_ls.setup({
 		settings = {
 			Lua = {
 				diagnostics = {
-					globals = { "vim" },
+					globals = { "vim", "opts" },
 				},
 			},
 		},
 	})
 end
+
+return M
