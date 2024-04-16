@@ -1,18 +1,17 @@
 import os
 import subprocess
 
-from libqtile import hook, layout, bar
+from libqtile import bar, hook, layout
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.config import Key, Group, Match, Drag, Click, Screen
 
+import widgets as wg
 from color_theme import colors
-import widgets as widgets
 
 wmname = "LG3D"
 mod = "mod4"
 myTerm = "alacritty"
 myBrowser = "brave"
-colors = colors
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
@@ -49,26 +48,17 @@ keys = [
     # navigation
     Key([mod], "k", lazy.layout.next(), desc="Focus next window"),
     Key([mod], "j", lazy.layout.previous(), desc="Focus previous window"),
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
-        desc="Swap focused with left"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
-        desc="Swap focused with down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(),
-        desc="Swap focused with up"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(),
-        desc="Swap focused with right"),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Swap focused with left"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Swap focused with down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Swap focused with up"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Swap focused with right"),
     # media
-    Key([], "XF86AudioLowerVolume", lazy.spawn(
-        "amixer sset Master 5%-"), desc="Lower volume"),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn(
-        "amixer sset Master 5%+"), desc="Raise volume"),
-    Key([], "XF86AudioMute", lazy.spawn(
-        "amixer sset Master 1+ toggle"), desc="Toggle mute"),
-    Key([], "XF86AudioPlay", lazy.spawn(
-        "playerctl play-pause"), desc="Toggle play/pause"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-"), desc="Lower volume"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+"), desc="Raise volume"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer sset Master 1+ toggle"), desc="Toggle mute"),
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Toggle play/pause"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media"),
-    Key([], "XF86AudioPrev", lazy.spawn(
-        "playerctl previous"), desc="Previous media"),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media"),
 ]
 
 groups = []  # type: list[Group]
@@ -85,9 +75,8 @@ group_names = [
 ]
 group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-for i in range(len(group_names)):
-    groups.append(
-        Group(name=group_names[i], layout="monadtall", label=group_labels[i]))
+for i, group_name in enumerate(group_names):
+    groups.append(Group(name=group_name, layout="monadtall", label=group_labels[i]))
 
 for group in groups:
     keys.extend(
@@ -96,13 +85,13 @@ for group in groups:
                 [mod],
                 group.name,
                 lazy.group[group.name].toscreen(),
-                desc="Switch to group {}".format(group.label),
+                desc=f"Switch to group {group.label}",
             ),
             Key(
                 [mod, "shift"],
                 group.name,
                 lazy.window.togroup(group.name, switch_group=False),
-                desc="Move focused window to group {}".format(group.label),
+                desc=f"Move focused window to group {group.label}",
             ),
         ]
     )
@@ -114,8 +103,7 @@ layout_theme = {
     "border_normal": colors["dark_grey"],
 }
 
-layouts = [layout.MonadTall(**layout_theme),
-           layout.Max(border_width=0, margin=0)]
+layouts = [layout.MonadTall(**layout_theme), layout.Max(border_width=0, margin=0)]
 floating_layout = layout.Floating(
     border_focus=colors["light_blue"],
     border_width=2,
@@ -139,38 +127,40 @@ floating_layout = layout.Floating(
 )
 
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
-widget_defaults = dict(font="Ubuntu Bold", fontsize=24,
-                       padding=0, background=colors["dark_grey"])
+widget_defaults = {
+    "font": "Ubuntu Bold",
+    "fontsize": 24,
+    "padding": 0,
+    "background": colors["dark_grey"],
+}
 
 extension_defaults = widget_defaults.copy()
 
 
 def init_widgets_list():
     return [
-        widgets.logo,
-        widgets.workspaces,
-        widgets.separator,
-        widgets.window_name,
-        widgets.spacer,
-        widgets.cpu,
-        widgets.spacer,
-        widgets.memory,
-        widgets.spacer,
-        widgets.updates,
-        widgets.spacer,
-        widgets.battery,
-        widgets.spacer,
-        widgets.clock,
-        widgets.spacer,
-        widgets.systray,
-        widgets.spacer,
+        wg.logo,
+        wg.workspaces,
+        wg.separator,
+        wg.window_name,
+        wg.spacer,
+        wg.cpu,
+        wg.spacer,
+        wg.memory,
+        wg.spacer,
+        wg.updates,
+        wg.spacer,
+        wg.battery,
+        wg.spacer,
+        wg.clock,
+        wg.spacer,
+        wg.systray,
+        wg.spacer,
     ]
 
 
@@ -186,8 +176,10 @@ def init_widgets_screen2():
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=48, **widget_defaults)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=48, **widget_defaults))]
+    return [
+        Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=48, **widget_defaults)),
+        Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=48, **widget_defaults)),
+    ]
 
 
 if __name__ in ["config", "__main__"]:

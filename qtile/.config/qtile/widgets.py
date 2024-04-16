@@ -6,7 +6,6 @@ from qtile_extras.widget.decorations import BorderDecoration
 
 from color_theme import colors
 
-
 logo = widget.Image(
     filename="~/.config/qtile/icons/arch.png",
     scale="False",
@@ -15,8 +14,7 @@ logo = widget.Image(
     margin_y=5,
 )
 
-prompt = widget.Prompt(font="Ubuntu Mono", fontsize=28,
-                       foreground=colors["light_grey"])
+prompt = widget.Prompt(font="Ubuntu Mono", fontsize=28, foreground=colors["light_grey"])
 
 workspaces = widget.GroupBox(
     fontsize=26,
@@ -42,8 +40,7 @@ separator = widget.TextBox(
 )
 
 current_layout = [
-    widget.CurrentLayoutIcon(
-        foreground=colors["light_grey"], padding=0, scale=0.7),
+    widget.CurrentLayoutIcon(foreground=colors["light_grey"], padding=0, scale=0.7),
     widget.CurrentLayout(foreground=colors["light_grey"], padding=5),
 ]
 
@@ -78,10 +75,8 @@ memory = widget.Memory(
 
 updates = widget.GenPollText(
     update_interval=300,
-    mouse_callbacks={"Button1": lazy.spawn(
-        "alacritty" + " -e sudo pacman -Syu")},
-    func=lambda: subprocess.check_output(
-        'printf "$(pacupdate)"', shell=True, text=True),
+    mouse_callbacks={"Button1": lazy.spawn("alacritty" + " -e sudo pacman -Syu")},
+    func=lambda: subprocess.check_output('printf "$(pacupdate)"', shell=True, text=True),
     foreground=colors["pink"],
     decorations=[
         BorderDecoration(
@@ -100,8 +95,7 @@ battery = widget.Battery(
     format="{char}    {percent:2.0%}",
     low_foreground=colors["red"],
     low_percentage=0.1,
-    decorations=[BorderDecoration(
-        colour=colors["orange"], border_width=[0, 0, 2, 0])],
+    decorations=[BorderDecoration(colour=colors["orange"], border_width=[0, 0, 2, 0])],
 )
 
 clock = widget.Clock(
