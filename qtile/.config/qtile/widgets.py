@@ -1,26 +1,22 @@
 import subprocess
 
-from libqtile import qtile
+from libqtile.lazy import lazy
 from qtile_extras import widget
 from qtile_extras.widget.decorations import BorderDecoration
 
-from .keys import TERM
-from .color_theme import colors
+from color_theme import colors
 
 
 logo = widget.Image(
     filename="~/.config/qtile/icons/arch.png",
     scale="False",
-    mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(TERM)},
+    mouse_callbacks={"Button1": lazy.spawn("alacritty")},
     margin_x=10,
-    margin_y=5
+    margin_y=5,
 )
 
-prompt = widget.Prompt(
-    font="Ubuntu Mono",
-    fontsize=28,
-    foreground=colors["light_grey"]
-)
+prompt = widget.Prompt(font="Ubuntu Mono", fontsize=28,
+                       foreground=colors["light_grey"])
 
 workspaces = widget.GroupBox(
     fontsize=26,
@@ -37,41 +33,27 @@ workspaces = widget.GroupBox(
     this_current_screen_border=colors["pink"],
     this_screen_border=colors["green"],
     other_current_screen_border=colors["pink"],
-    other_screen_border=colors["green"]
+    other_screen_border=colors["green"],
 )
 
 
 separator = widget.TextBox(
-    text='|',
-    font="Ubuntu Mono",
-    foreground=colors["light_grey"],
-    padding=2,
-    fontsize=34
+    text="|", font="Ubuntu Mono", foreground=colors["light_grey"], padding=2, fontsize=34
 )
 
 current_layout = [
     widget.CurrentLayoutIcon(
-        foreground=colors["light_grey"],
-        padding=0,
-        scale=0.7
-    ),
-    widget.CurrentLayout(
-        foreground=colors["light_grey"],
-        padding=5
-    ),
+        foreground=colors["light_grey"], padding=0, scale=0.7),
+    widget.CurrentLayout(foreground=colors["light_grey"], padding=5),
 ]
 
-window_name = widget.WindowName(
-    foreground=colors["blue"],
-    max_chars=40
-)
+window_name = widget.WindowName(foreground=colors["blue"], max_chars=40)
 
 spacer = widget.Spacer(length=16)
 
 cpu = widget.CPU(
-    format='   Cpu: {load_percent}%',
-    mouse_callbacks={
-        'Button1': lambda: qtile.cmd_spawn(TERM + ' -e htop')},
+    format="   Cpu: {load_percent}%",
+    mouse_callbacks={"Button1": lazy.spawn("alacritty" + " -e htop")},
     foreground=colors["yellow"],
     decorations=[
         BorderDecoration(
@@ -83,10 +65,9 @@ cpu = widget.CPU(
 
 memory = widget.Memory(
     foreground=colors["red"],
-    mouse_callbacks={
-        'Button1': lambda: qtile.cmd_spawn(TERM + ' -e htop')},
-    format='{MemUsed: .0f}{mm}',
-    fmt='🖥  Mem: {}',
+    mouse_callbacks={"Button1": lazy.spawn("alacritty" + " -e htop")},
+    format="{MemUsed: .0f}{mm}",
+    fmt="🖥  Mem: {}",
     decorations=[
         BorderDecoration(
             colour=colors["red"],
@@ -97,10 +78,10 @@ memory = widget.Memory(
 
 updates = widget.GenPollText(
     update_interval=300,
-    mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
-        TERM + ' -e sudo pacman -Syu')},
+    mouse_callbacks={"Button1": lazy.spawn(
+        "alacritty" + " -e sudo pacman -Syu")},
     func=lambda: subprocess.check_output(
-        "printf \"$(pacupdate)\"", shell=True, text=True),
+        'printf "$(pacupdate)"', shell=True, text=True),
     foreground=colors["pink"],
     decorations=[
         BorderDecoration(
@@ -108,7 +89,7 @@ updates = widget.GenPollText(
             border_width=[0, 0, 2, 0],
         )
     ],
-    fmt='󰂚  {}',
+    fmt="󰂚  {}",
 )
 
 battery = widget.Battery(
@@ -119,12 +100,8 @@ battery = widget.Battery(
     format="{char}    {percent:2.0%}",
     low_foreground=colors["red"],
     low_percentage=0.1,
-    decorations=[
-        BorderDecoration(
-            colour=colors["orange"],
-            border_width=[0, 0, 2, 0]
-        )
-    ]
+    decorations=[BorderDecoration(
+        colour=colors["orange"], border_width=[0, 0, 2, 0])],
 )
 
 clock = widget.Clock(

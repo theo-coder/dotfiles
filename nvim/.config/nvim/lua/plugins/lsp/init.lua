@@ -1,106 +1,66 @@
 return {
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
-			"neovim/nvim-lspconfig",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/nvim-cmp",
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"j-hui/fidget.nvim",
-			"VonHeikemen/lsp-zero.nvim",
+			{ "antosha417/nvim-lsp-file-operations", config = true },
+			{ "folke/neodev.nvim", opts = {} },
+			{ "j-hui/fidget.nvim", opts = {} },
+			{ "mrcjkb/rustaceanvim", version = "^4", lazy = false },
 		},
 		config = function()
-			local lsp_zero = require("lsp-zero")
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				require("cmp_nvim_lsp").default_capabilities()
+			)
 
-			require("fidget").setup({})
-			require("mason").setup({})
-			require("mason-lspconfig").setup({
+			require("mason").setup({
+				"tsserver",
+				"html",
+				"cssls",
+				"tailwindcss",
+				"lua_ls",
+				"emmet_ls",
+				"jsonls",
+			})
+			require("mason-tool-installer").setup({
 				ensure_installed = {
-					"lua_ls",
-					"rust_analyzer",
-					"tsserver",
-					"tailwindcss",
-					"eslint",
-					"emmet_ls",
-					"jsonls",
-				},
-				handlers = {
-					lsp_zero.default_setup,
+					"prettier",
+					"stylua",
+					"isort",
+					"black",
+					"pylint",
+					"eslint_d",
 				},
 			})
 
-			require("plugins.lsp.servers.lua_ls").setup()
-			require("plugins.lsp.servers.rust_analyzer").setup()
-
-			local cmp = require("cmp")
-			local cmp_action = require("lsp-zero").cmp_action()
-
-			cmp.setup({
-				completion = {
-					completeopt = "menu,menuone,noinsert",
-				},
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<Tab>"] = cmp_action.luasnip_supertab(),
-					["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-p>"] = cmp_action.luasnip_jump_backward(),
-					["<C-n>"] = cmp_action.luasnip_jump_forward(),
-					["<C-u>"] = cmp.mapping.scroll_docs(-4),
-					["<C-d>"] = cmp.mapping.scroll_docs(4),
-				}),
+			require("mason-lspconfig").setup_handlers({
+				function(server_name)
+					require("lspconfig")[server_name].setup({ capabilities = capabilities })
+				end,
+				["lua_ls"] = require("plugins.lsp.servers.lua_ls").setup(capabilities),
 			})
 
-			lsp_zero.on_attach(function()
-				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
-				vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>")
-				vim.keymap.set("n", "gD", "<cmd>Telescope lsp_declarations<cr>")
-				vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<cr>")
-				vim.keymap.set("n", "gb", "<cmd>Telescope lsp_type_definitions<cr>")
-				vim.keymap.set("n", "K", vim.lsp.buf.hover)
-				vim.keymap.set("n", "gK", vim.lsp.buf.signature_help)
-				vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
-				vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
-				vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
-			end)
-
-			-- 	sources = cmp.config.sources({
-			-- 		{ name = "nvim_lsp" },
-			-- 		{ name = "luasnip" },
-			-- 	}, {
-			-- 		{ name = "buffer" },
-			-- 	}, {
-			-- 		{ name = "path" },
-			-- 	}),
-			-- })
-			--
-			-- cmp.setup.cmdline({ "/", "?" }, {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = {
-			-- 		{ name = "buffer" },
-			-- 	},
-			-- })
-			--
-			-- cmp.setup.cmdline(":", {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = cmp.config.sources({
-			-- 		{ name = "path" },
-			-- 	}, {
-			-- 		{ name = "cmdline" },
-			-- 	}),
-			-- })
-			--
-			lsp_zero.setup()
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+				callback = function()
+					vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
+					vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>")
+					vim.keymap.set("n", "gD", "<cmd>Telescope lsp_declarations<cr>")
+					vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<cr>")
+					vim.keymap.set("n", "gb", "<cmd>Telescope lsp_type_definitions<cr>")
+					vim.keymap.set("n", "K", vim.lsp.buf.hover)
+					vim.keymap.set("n", "gK", vim.lsp.buf.signature_help)
+					vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
+					vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
+					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
+				end,
+			})
 
 			require("plugins.lsp.snippets.all")
 		end,
@@ -109,7 +69,6 @@ return {
 		"Saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
 		config = function()
-			-- TODO: autocmds
 			require("crates").setup({})
 		end,
 	},

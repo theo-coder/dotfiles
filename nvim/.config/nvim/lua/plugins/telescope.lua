@@ -4,6 +4,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"olacin/telescope-cc.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		"folke/todo-comments.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -17,6 +18,7 @@ return {
 		vim.keymap.set("n", "<leader>pf", "<cmd>Telescope find_files<cr>")
 		vim.keymap.set("n", "<leader>pg", "<cmd>Telescope git_files<cr>")
 		vim.keymap.set("n", "<leader>pb", "<cmd>Telescope buffers<cr>")
+		vim.keymap.set("n", "<leader>pt", "<cmd>TodoTelescope<cr>")
 
 		vim.keymap.set("n", "<leader>gc", "<cmd>Telescope conventional_commits<cr>")
 
