@@ -195,6 +195,8 @@ def assign_app_group(client):
         "discord": group_names[5],
         "obsidian": group_names[4],
         "xterm": group_names[8],
+        "crx_nkbljeindhmekmppbpgebpjebkjbmfaj": group_names[7],  # fastmail
+        "crx_enemhkebmljfgiemkbdjbfinobgfbdao": group_names[4],  # outline
     }
 
     wm_name_default_group = {"brave": group_names[1]}
