@@ -1,10 +1,10 @@
 return {
-    "folke/trouble.nvim",
-    config = function()
-        require("trouble").setup({})
+	"folke/trouble.nvim",
+	config = function()
+		require("trouble").setup({})
 
-        vim.keymap.set("n", "<leader>tt", function()
-            require("trouble").toggle()
-        end)
-    end
+		vim.keymap.set("n", "<leader>tt", function()
+			require("trouble").toggle("workspace_diagnostics")
+		end)
+	end,
 }
