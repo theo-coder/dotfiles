@@ -76,7 +76,10 @@ group_names = [
 group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 for i, group_name in enumerate(group_names):
-    groups.append(Group(name=group_name, layout="monadtall", label=group_labels[i]))
+    if i == 8:
+        groups.append(Group(name=group_name, layout="matrix", label=group_labels[i]))
+    else:
+        groups.append(Group(name=group_name, layout="monadtall", label=group_labels[i]))
 
 for group in groups:
     keys.extend(
@@ -97,13 +100,13 @@ for group in groups:
     )
 
 layout_theme = {
-    "border_width": 2,
-    "margin": 8,
+    "border_width": 0,  # 2,
+    "margin": 0,  # 8,
     "border_focus": colors["light_blue"],
     "border_normal": colors["dark_grey"],
 }
 
-layouts = [layout.MonadTall(**layout_theme), layout.Max(border_width=0, margin=0)]
+layouts = [layout.MonadTall(**layout_theme), layout.Max(border_width=0, margin=0), layout.Matrix(**layout_theme, columns=4)]
 floating_layout = layout.Floating(
     border_focus=colors["light_blue"],
     border_width=2,
@@ -197,6 +200,7 @@ def assign_app_group(client):
         "xterm": group_names[8],
         "crx_nkbljeindhmekmppbpgebpjebkjbmfaj": group_names[7],  # fastmail
         "crx_enemhkebmljfgiemkbdjbfinobgfbdao": group_names[4],  # outline
+        "cssh": group_names[8]
     }
 
     wm_name_default_group = {"brave": group_names[1]}
