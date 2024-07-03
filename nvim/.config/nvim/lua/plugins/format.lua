@@ -14,7 +14,7 @@ return {
 				typescriptreact = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
-				python = { "isort", "black" },
+				python = { "black" },
 			},
 			format_on_save = format_options,
 		})

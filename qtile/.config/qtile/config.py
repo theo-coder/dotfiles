@@ -59,6 +59,8 @@ keys = [
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Toggle play/pause"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media"),
+    # layouts
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 ]
 
 groups = []  # type: list[Group]
@@ -106,7 +108,12 @@ layout_theme = {
     "border_normal": colors["dark_grey"],
 }
 
-layouts = [layout.MonadTall(**layout_theme), layout.Max(border_width=0, margin=0), layout.Matrix(**layout_theme, columns=4)]
+layouts = [
+    layout.MonadTall(**layout_theme),
+    layout.Max(border_width=0, margin=0),
+    layout.Matrix(**layout_theme, columns=4),
+    layout.VerticalTile(**layout_theme),
+]
 floating_layout = layout.Floating(
     border_focus=colors["light_blue"],
     border_width=2,
@@ -150,6 +157,9 @@ def init_widgets_list():
         wg.logo,
         wg.workspaces,
         wg.separator,
+        wg.current_layout[0],
+        wg.current_layout[1],
+        wg.separator,
         wg.window_name,
         wg.spacer,
         wg.cpu,
@@ -174,7 +184,7 @@ def init_widgets_screen1():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[15:16]
+    del widgets_screen2[18:19]
     return widgets_screen2
 
 
@@ -200,7 +210,7 @@ def assign_app_group(client):
         "xterm": group_names[8],
         "crx_nkbljeindhmekmppbpgebpjebkjbmfaj": group_names[7],  # fastmail
         "crx_enemhkebmljfgiemkbdjbfinobgfbdao": group_names[4],  # outline
-        "cssh": group_names[8]
+        "cssh": group_names[8],
     }
 
     wm_name_default_group = {"brave": group_names[1]}
