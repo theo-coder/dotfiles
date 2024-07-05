@@ -6,6 +6,12 @@ Only works on Arch (btw)
 
 ## Usage
 
+### Available Tags
+
+- system
+- neovim
+- qtile
+
 ### Install
 
 To install all the dotfiles run the following:
