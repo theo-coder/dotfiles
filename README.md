@@ -1,3 +1,12 @@
+<p align="center">
+    <a href="https://github.com/theo-coder/dotfiles/actions/workflows/ansible-lint.yml"><img align="center" src="https://github.com/theo-coder/dotfiles/actions/workflows/ansible-lint.yml/badge.svg"/></a>
+    <a href="https://github.com/theo-coder/dotfiles/issues"><img align="center" src="https://img.shields.io/github/issues/theo-coder/dotfiles"/></a>
+    <a href="https://github.com/theo-coder/dotfiles/commits/main"><img align="center" src="https://img.shields.io/github/last-commit/theo-coder/dotfiles"/></a>
+    <a href="https://github.com/theo-coder"><img align="center" src="https://img.shields.io/badge/author-theo--coder-blue"/></a>
+</p>
+
+---
+
 ## Requirements
 
 ### Operating System
