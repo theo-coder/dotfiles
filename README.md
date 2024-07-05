@@ -1,3 +1,4 @@
+![dotfiles-logo](https://github.com/theo-coder/dotfiles/assets/57922624/79b4f139-c937-46fd-87df-4192206d173f)
 <p align="center">
     <a href="https://github.com/theo-coder/dotfiles/actions/workflows/ansible-lint.yml"><img align="center" src="https://github.com/theo-coder/dotfiles/actions/workflows/ansible-lint.yml/badge.svg"/></a>
     <a href="https://github.com/theo-coder/dotfiles/issues"><img align="center" src="https://img.shields.io/github/issues/theo-coder/dotfiles"/></a>
