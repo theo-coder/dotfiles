@@ -1,0 +1,18 @@
+---
+- name: Neovim | Install Neovim
+  community.general.pacman:
+    name: neovim
+    state: present
+
+- name: Neovim | Config folder
+  ansible.builtin.file:
+    mode: 0755
+    path: "{{ ansible_user_dir }}/.config/nvim"
+    state: directory
+
+- name: Neovim | Create symlink to config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/nvim"
+    state: link
+    force: true

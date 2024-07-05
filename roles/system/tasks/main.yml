@@ -1,0 +1,47 @@
+---
+- name: System | Setup cron
+  block:
+    - name: System | Install cronie
+      community.general.pacman:
+        name: cronie
+        state: present
+      become: true
+
+    - name: System | Start cronie
+      ansible.builtin.service:
+        name: cronie
+        enabled: true
+      become: true
+
+- name: System | Select best mirrors list
+  block:
+    - name: System | Install reflector
+      community.general.pacman:
+        name: reflector
+        state: present
+      become: true
+
+    - name: System | Enable reflector
+      ansible.builtin.cron:
+        name: reflector
+        special_time: daily
+        job: reflector  --verbose \
+          --sort rate \
+          --age 24 \
+          --protocol https \
+          --country France \
+          --threads {{ ansible_facts.processor_vcpus }} \
+          --save /etc/pacman.d/mirrorlist
+
+- name: System | Update Repositories and Upgrade Packages
+  community.general.pacman:
+    update_cache: true
+    upgrade: true
+  become: true
+
+- name: System | Set hosts
+  ansible.builtin.template:
+    dest: "/etc/hosts"
+    src: hosts.j2
+    mode: 0644
+  become: true
