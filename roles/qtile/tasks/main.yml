@@ -8,7 +8,7 @@
 
 - name: Qtile | Config folder
   ansible.builtin.file:
-    mode: 0755
+    mode: "0755"
     path: "{{ ansible_user_dir }}/.config/qtile"
     state: directory
 
