@@ -1,0 +1,7 @@
+---
+- name: Qtile | Reload Qtile config
+  ansible.builtin.command: qtile cmd-obj -o cmd -f reload_config
+  notify: Qtile | Restart Qtile
+
+- name: Qtile | Restart Qtile
+  ansible.builtin.command: qtile cmd-obj -o cmd -f restart

@@ -1,0 +1,21 @@
+---
+- name: Qtile | Install Qtile
+  community.general.pacman:
+    name:
+      - qtile
+      - qtile-extras
+    state: present
+
+- name: Qtile | Config folder
+  ansible.builtin.file:
+    mode: 0755
+    path: "{{ ansible_user_dir }}/.config/qtile"
+    state: directory
+
+- name: Qtile | Create symlink to config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/qtile"
+    state: link
+    force: true
+  notify: Qtile | Reload Qtile config
