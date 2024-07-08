@@ -21,6 +21,7 @@ Only works on Arch (btw)
 - system
 - neovim
 - qtile
+- alacritty
 
 ### Install
 

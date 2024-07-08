@@ -3,3 +3,4 @@ default_roles:
   - system
   - neovim
   - qtile
+  - alacritty

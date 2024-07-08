@@ -5,6 +5,7 @@
       - qtile
       - qtile-extras
     state: present
+  become: true
 
 - name: Qtile | Config folder
   ansible.builtin.file:

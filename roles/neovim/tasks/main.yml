@@ -3,6 +3,7 @@
   community.general.pacman:
     name: neovim
     state: present
+  become: true
 
 - name: Neovim | Config folder
   ansible.builtin.file:
