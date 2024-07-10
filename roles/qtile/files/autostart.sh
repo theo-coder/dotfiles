@@ -2,7 +2,7 @@
 
 xrdb -merge ~/.Xresources
 xmodmap ~/.Xmodmap
-lxsession &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 nm-applet &
 udiskie &
 xfce4-power-manager &
