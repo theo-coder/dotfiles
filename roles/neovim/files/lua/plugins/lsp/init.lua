@@ -23,7 +23,7 @@ return {
 				"html",
 				"cssls",
 				"tailwindcss",
-				"lua_ls",
+				"lua-language-server",
 				"emmet_ls",
 				"jsonls",
 			})
@@ -62,6 +62,7 @@ return {
 			})
 
 			require("plugins.lsp.snippets.all")
+			require("plugins.lsp.snippets.bash")
 		end,
 	},
 	{
