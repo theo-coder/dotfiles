@@ -5,6 +5,7 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			"b0o/schemastore.nvim",
 			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 			{ "antosha417/nvim-lsp-file-operations", config = true },
 			{ "j-hui/fidget.nvim", opts = {} },
@@ -19,7 +20,7 @@ return {
 			)
 
 			require("mason").setup({
-				"tsserver",
+				"ts_ls",
 				"html",
 				"cssls",
 				"tailwindcss",
@@ -43,6 +44,7 @@ return {
 					require("lspconfig")[server_name].setup({ capabilities = capabilities })
 				end,
 				["lua_ls"] = require("plugins.lsp.servers.lua_ls").setup(capabilities),
+				["jsonls"] = require("plugins.lsp.servers.jsonls").setup(capabilities),
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
