@@ -75,7 +75,7 @@ memory = widget.Memory(
 
 updates = widget.GenPollText(
     update_interval=300,
-    mouse_callbacks={"Button1": lazy.spawn("alacritty" + " -e sudo pacman -Syu")},
+    mouse_callbacks={"Button1": lazy.spawn("alacritty" + " -e dotfiles -t system")},
     func=lambda: subprocess.check_output('printf "$(pacupdate)"', shell=True, text=True),
     foreground=colors["pink"],
     decorations=[
