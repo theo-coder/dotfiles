@@ -8,6 +8,27 @@ return {
 		end,
 		padding = 1,
 	},
+	file_status_symbol = {
+		modified = "",
+		readonly = "",
+		new = "",
+		unnamed = "󰽤",
+	},
+	winbar_symbol = {
+		function()
+			if not vim.lsp.buf_is_attached(0) then
+				return ""
+			end
+
+			local navic = require("nvim-navic")
+
+			if navic.is_available() then
+				return navic.get_location()
+			end
+
+			return ""
+		end,
+	},
 	git_repo = {
 		function()
 			if
@@ -42,7 +63,7 @@ return {
 	lsp_client = {
 		function(msg)
 			msg = msg or ""
-			local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
+			local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
 
 			if next(buf_clients) == nil then
 				if type(msg) == "boolean" or #msg == 0 then

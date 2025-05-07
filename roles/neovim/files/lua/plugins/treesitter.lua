@@ -8,7 +8,7 @@ return {
 	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+			ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "rust" },
 
 			autotag = {
 				enable = true,
@@ -17,7 +17,6 @@ return {
 			auto_install = true,
 			sync_install = false,
 			ignore_install = { "latex" },
-			modules = {},
 
 			highlight = {
 				enable = true,

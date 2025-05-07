@@ -1,15 +1,30 @@
+-- TODO: Pass to fzf-lua
 return {
 	"nvim-telescope/telescope.nvim",
+	tag = "0.1.8",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"olacin/telescope-cc.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		"folke/todo-comments.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
 
-		telescope.setup({})
+		telescope.setup({
+			pickers = {
+				find_files = {
+					hidden = true,
+					find_command = {
+						"rg",
+						"--files",
+						"--glob",
+						"!{.git/*,.next/*,target/*,node_modules/*,.sqlx/*}",
+						"--path-separator",
+						"/",
+					},
+				},
+			},
+		})
 		telescope.load_extension("fzf")
 		telescope.load_extension("conventional_commits")
 
@@ -18,7 +33,7 @@ return {
 		vim.keymap.set("n", "<leader>pf", "<cmd>Telescope find_files<cr>")
 		vim.keymap.set("n", "<leader>pg", "<cmd>Telescope git_files<cr>")
 		vim.keymap.set("n", "<leader>pb", "<cmd>Telescope buffers<cr>")
-		vim.keymap.set("n", "<leader>pt", "<cmd>TodoTelescope<cr>")
+		vim.keymap.set("n", "<leader>pn", "<cmd>Telescope notify<cr>")
 
 		vim.keymap.set("n", "<leader>gc", "<cmd>Telescope conventional_commits<cr>")
 
