@@ -12,7 +12,14 @@ return {
 		completion = { documentation = { auto_show = true } },
 
 		sources = {
-			default = { "lsp", "snippets", "buffer", "path" },
+			default = { "lazydev", "lsp", "snippets", "buffer", "path" },
+			providers = {
+				lazydev = {
+					name = "LazyDev",
+					module = "lazydev.integrations.blink",
+					score_offset = 100,
+				},
+			},
 		},
 
 		fuzzy = { implementation = "prefer_rust_with_warning" },
