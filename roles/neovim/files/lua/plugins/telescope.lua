@@ -1,7 +1,6 @@
 -- TODO: Pass to fzf-lua
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.8",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"olacin/telescope-cc.nvim",

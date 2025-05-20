@@ -36,11 +36,11 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 				callback = function()
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references)
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-					vim.keymap.set("n", "gI", vim.lsp.buf.implementation)
-					vim.keymap.set("n", "gb", vim.lsp.buf.type_definition)
+					vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
+					vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>")
+					vim.keymap.set("n", "gD", "<cmd>Telescope lsp_declarations<cr>")
+					vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<cr>")
+					vim.keymap.set("n", "gb", "<cmd>Telescope lsp_type_definitions<cr>")
 					vim.keymap.set("n", "K", vim.lsp.buf.hover)
 					vim.keymap.set("n", "gK", vim.lsp.buf.signature_help)
 					vim.keymap.set("n", "<leader>dn", function()
