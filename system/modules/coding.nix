@@ -1,0 +1,28 @@
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    git
+    neovim
+    gcc
+    gnumake
+    go
+    cargo
+    luarocks
+    stylua
+    tree-sitter
+    python3
+    ruby
+    nodejs
+    delta
+    pyright
+    cargo
+    rustc
+    rust-analyzer
+    taplo
+    marksman
+    alejandra
+    bun
+    fishPlugins.fzf-fish
+    fishPlugins.nvm
+    pyenv
+  ];
+}
