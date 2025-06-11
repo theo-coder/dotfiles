@@ -31,6 +31,7 @@
     powertop
     libinput
     acpi
+    brightnessctl
   ];
 
   programs.nm-applet.enable = true;
