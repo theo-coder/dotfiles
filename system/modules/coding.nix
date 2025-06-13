@@ -24,5 +24,8 @@
     fishPlugins.fzf-fish
     fishPlugins.nvm
     pyenv
+    ghc
+    haskell-language-server
+    lua-language-server
   ];
 }

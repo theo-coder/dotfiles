@@ -20,6 +20,10 @@
     dpi = 144;
   };
 
+  environment.systemPackages = with pkgs; [
+    xmobar
+  ];
+
   environment.variables = {
     GDK_SCALE = "2";
     GDK_DPI_SCALE = "0.5";

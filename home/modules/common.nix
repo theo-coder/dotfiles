@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   imports = [
     ./cli.nix
     ./kitty.nix
@@ -10,6 +10,7 @@
   home = rec {
     username = "theo";
     homeDirectory = "/home/${username}";
+    file.".local/bin".source = config.lib.file.mkOutOfStoreSymlink "../config/bin";
   };
 
   programs.home-manager.enable = true;

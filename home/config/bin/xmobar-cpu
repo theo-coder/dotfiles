@@ -1,0 +1,21 @@
+#!/bin/sh
+
+usage=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}')
+
+result=$(echo "$usage" | awk '
+{
+    if ($1 < 10) print "󰝦"
+    if ($1 < 20) print "󰪞"
+    if ($1 < 30) print "󰪟"
+    if ($1 < 40) print "󰪠"
+    if ($1 < 50) print "󰪠"
+    if ($1 < 60) print "󰪡"
+    if ($1 < 70) print "󰪢"
+    if ($1 < 80) print "󰪣"
+    if ($1 < 90) print "󰪤"
+    else print "󰪥"
+}
+')
+
+
+echo $result

@@ -17,6 +17,7 @@
     ncspot
     playerctl
     gimp
+    neohtop
     gthumb
     feh
     libnotify
