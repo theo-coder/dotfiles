@@ -10,6 +10,9 @@
           xft-dpi=196
         '';
       };
+      sessionCommands = ''
+        $HOME/.local/bin/displayctl
+      '';
     };
     enable = true;
     windowManager.xmonad = {
