@@ -43,7 +43,7 @@
     cursor = {
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;
-      size = 32;
+      size = 40;
     };
   };
 }

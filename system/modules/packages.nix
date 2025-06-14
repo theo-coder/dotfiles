@@ -33,6 +33,7 @@
     libinput
     acpi
     brightnessctl
+    dunst
   ];
 
   programs.nm-applet.enable = true;

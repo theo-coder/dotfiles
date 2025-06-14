@@ -2,6 +2,6 @@
   enable = true;
 in {
   hardware.bluetooth.enable = enable;
-  hardware.bluetooth.powerOnBoot = false;
+  hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = enable;
 }
