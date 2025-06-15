@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   fonts.fontconfig.enable = true;
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     flat-remix-gtk
   ];
 

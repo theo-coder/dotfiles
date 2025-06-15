@@ -6,6 +6,7 @@
     ./nvim.nix
     ./starship.nix
     ./hyprland.nix
+    ./gtk.nix
   ];
 
   home = rec {
