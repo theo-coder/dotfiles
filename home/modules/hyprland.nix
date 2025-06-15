@@ -77,7 +77,12 @@
           "$mod SHIFT, p, exec, ~/.local/bin/monitor prompt"
           "$mod CONTROL, p, exec, ~/.local/bin/monitor internal"
           "$mod, X, exec, hyprlock"
-          ", Print, exec, grimblast copy area"
+          "$mod, H, movefocus, l"
+          "$mod, J, movefocus, d"
+          "$mod, K, movefocus, u"
+          "$mod, L, movefocus, r"
+          "$mod, S, togglespecialworkspace, scratchpad"
+          "$mod SHIFT, S, movetoworkspace, special:scratchpad"
         ]
         ++ (
           builtins.concatLists (builtins.genList (
@@ -90,6 +95,22 @@
             )
             9)
         );
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
+      bindel = [
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86MonBrightnessUp, exec, brightnessctl set +10%"
+        ",XF86MonBrightnessDown, exec, brightnessctl set 10%-"
+        ",Print, exec, ~/.local/bin/capture"
+      ];
+      windowrule = [
+        "suppressevent maximize, class:.*"
+      ];
     };
   };
 }

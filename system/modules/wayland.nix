@@ -5,6 +5,12 @@
 }: {
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  environment.systemPackages = with pkgs; [
+    wl-clipboard
+    slurp
+    grim
+  ];
+
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-substituters = ["https://hyprland.cachix.org"];
