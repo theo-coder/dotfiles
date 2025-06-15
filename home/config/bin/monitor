@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+SCHEMES="/home/theo/.local/lib/monitor.json"
+
+redraw() {
+    pidof wpaperd > /dev/null
+    if [[ $? -eq 0 ]] ; then
+        pkill wpaperd
+    fi
+    wpaperd -d
+}
+
+setup() {
+    config=$(jq ".[] | select(.name == \""$1"\")" $SCHEMES)
+
+    if [ -z "$config" ]; then
+        echo "Scheme not found, exiting..."
+        exit 1
+    fi
+
+    if [ "$1" == "internal" ]; then
+        for name in $(hyprctl monitors -j | jq .[].name | tr -d '"' | grep -v "eDP-1"); do
+            hyprctl keyword monitor "$name, disable" > /dev/null
+        done
+    fi
+
+    for monitor in $(echo "$config" | jq -rc ".monitors[]"); do
+        serial=$(echo "$monitor" | jq '.serial')
+        resolution=$(echo "$monitor" | jq '.resolution' | tr -d '"')
+        position=$(echo "$monitor" | jq '.position' | tr -d '"')
+        zoom=$(echo "$monitor" | jq '.zoom' | tr -d '"')
+
+        port=$(echo "$serial" | xargs -I % sh -c "hyprctl monitors all -j | jq -r '.[] | select(.serial == \"%\") | .name'")
+
+        if [ ! -z "$port" ]; then
+            hyprctl keyword monitor "$port,$resolution,$position,$zoom" > /dev/null
+        fi
+    done
+
+    redraw
+    exit 0
+}
+
+prompt() {
+    # Options
+    home=" Home"
+    idfr="⌨ Idfr"
+    internal="󰌢 Internal"
+    detect="󰁪 Detect"
+
+    selected=$(echo -e "$home\n$idfr\n$internal\n$detect" | rofi -dmenu -p "Monitor setup" -theme $HOME/.local/lib/rofi/monitor.rasi)
+
+    case ${selected} in
+        $home) setup "home";;
+        $idfr) setup "idfr";;
+        $internal) setup "internal";;
+        $detect) auto_apply;;
+        *) exit 0;;
+    esac
+}
+
+daemon() {
+    handle() {
+        case $1 in
+            monitoradded*) auto_apply;;
+            monitorremoved*) auto_apply;;
+        esac
+    }
+
+    socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do handle "$line"; done
+    exit 0
+}
+
+auto_apply() {
+    detected_serials=$(hyprctl monitors all -j | jq '.[] | .serial' | tr -d '"' | sort | tr '\n' ' ' | sed 's/ $//')
+
+    if [ "$(echo $detected_serials | wc -w)" = "0" ]; then
+        echo "No device detected, loading default..."
+        hyprctl keyword monitor "eDP-1,preferred,auto,auto"
+        redraw
+    else
+        jq -c '.[]' "$SCHEMES" | while read -r scheme; do
+            scheme_name=$(echo "$scheme" | jq -r '.name')
+            serials=$(echo "$scheme" | jq -r '.monitors[] | .serial' | sort | tr '\n' ' ' | sed 's/ $//')
+
+            if [ "$detected_serials" = "$serials" ]; then
+                echo "Scheme $scheme_name matched, loading..."
+                setup $scheme_name
+            fi
+        done
+    fi
+
+}
+
+case "$1" in
+    prompt) prompt;;
+    daemon) daemon;;
+    *) auto_apply;;
+esac
+
