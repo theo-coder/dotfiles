@@ -3,6 +3,7 @@
     wayland
     wlr-randr
     wdisplays
+    waybar
     wget
     tldr
     xdg-utils

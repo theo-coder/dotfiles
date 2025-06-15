@@ -12,6 +12,7 @@
     username = "theo";
     homeDirectory = "/home/${username}";
     file.".local/bin".source = config.lib.file.mkOutOfStoreSymlink ../config/bin;
+    file.".local/lib".source = config.lib.file.mkOutOfStoreSymlink ../config/lib;
   };
 
   programs.home-manager.enable = true;

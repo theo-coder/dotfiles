@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   nix.settings = {
@@ -18,41 +22,21 @@
     };
   };
 
-  # services.gnome.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
-  # services.xserver = {
-  #   displayManager = {
-  #     lightdm.greeters.slick = {
-  #       enable = true;
-  #       theme.name = "Stylix";
-  #       extraConfig = ''
-  #         [Greeter]
-  #         enable-hidpi=on
-  #         xft-dpi=196
-  #       '';
-  #     };
-  #     sessionCommands = ''
-  #       $HOME/.local/bin/displayctl
-  #     '';
-  #   };
-  #   enable = true;
-  #   windowManager.xmonad = {
-  #     enable = true;
-  #     enableContribAndExtras = true;
-  #   };
-  #   xkb.options = "eurosign:e,caps:escape";
-  #   dpi = 144;
-  # };
-  #
-  # environment.systemPackages = with pkgs; [
-  #   xmobar
-  # ];
-  #
-  # environment.variables = {
-  #   ELECTRON_FORCE_DEVICE_SCALE_FACTOR = "0.5";
-  #   GDK_SCALE = "0.5";
-  #   GDK_DPI_SCALE = "1";
-  #   #_JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-  #   XCURSOR_SIZE = "35";
-  # };
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.default;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+  };
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = ["gtk"];
+      hyprland.default = ["gtk" "hyprland"];
+    };
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 }
