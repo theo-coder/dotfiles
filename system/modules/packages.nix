@@ -34,6 +34,7 @@
     acpi
     brightnessctl
     dunst
+    mattermost-desktop
   ];
 
   programs.nm-applet.enable = true;

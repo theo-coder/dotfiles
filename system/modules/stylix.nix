@@ -13,6 +13,7 @@
     #override = { base00 = "#000000"; };
 
     image = ../../assets/wallpapers/0290.jpg;
+    polarity = "dark";
 
     fonts = rec {
       sansSerif = {
@@ -43,7 +44,7 @@
     cursor = {
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;
-      size = 40;
+      size = 35;
     };
   };
 }

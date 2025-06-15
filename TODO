@@ -1,3 +1,9 @@
+- Fix displayctl call
+- add xmobar to all displays
+- fix wallpapers on multiple displays
+- add keybind for sound
+- desactiver la veille quand un media joue
+
 Xmobar:
 - pour la batterie du casque, je veux toujours l'afficher, soit visible comme actuellement, soit avec un casque barre et si je clique ca m'ouvre blueman
 - ajouter la batterie du laptop
