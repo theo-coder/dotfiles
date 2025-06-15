@@ -20,6 +20,7 @@
     ./stylix.nix
     ./users.nix
     ./ectool.nix
+    ./gtk.nix
     ./wayland.nix
   ];
 
