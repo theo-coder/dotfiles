@@ -9,6 +9,11 @@
     waybar
     slurp
     grim
+    hyprpolkitagent
+    wl-clip-persist
+    cliphist
+    hypridle
+    poweralertd
   ];
 
   nix.settings = {

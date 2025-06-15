@@ -110,8 +110,26 @@
       ];
       windowrule = [
         "suppressevent maximize, class:.*"
+        "pin,class:^(rofi)$"
+      ];
+      exec-once = [
+        "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user start hyprpolkitagent"
+
+        "poweralertd &"
+        "wl-clip-persist --clipboard both &"
+        "wl-paste --watch cliphist store &"
+        "waybar &"
+        "dunst &"
+        "hypridle"
       ];
     };
+    extraConfig = ''
+      xwayland {
+          force_zero_scaling = true
+      }
+    '';
   };
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";

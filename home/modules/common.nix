@@ -7,6 +7,7 @@
     ./starship.nix
     ./hyprland.nix
     ./gtk.nix
+    ./waybar.nix
   ];
 
   home = rec {
