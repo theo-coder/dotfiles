@@ -1,8 +1,5 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    #wayland
-    #wlr-randr
-    #wdisplays
     wget
     tldr
     xdg-utils

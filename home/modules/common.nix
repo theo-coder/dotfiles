@@ -5,6 +5,7 @@
     ./fish.nix
     ./nvim.nix
     ./starship.nix
+    ./hyprland.nix
   ];
 
   home = rec {
