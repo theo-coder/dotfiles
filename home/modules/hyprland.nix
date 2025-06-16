@@ -14,6 +14,7 @@
       "$mod" = "SUPER";
       "$terminal" = "kitty";
       "$browser" = "zen";
+      "$fileManager" = "pcmanfm";
       "$menu" = "~/.local/bin/applauncher";
       general = {
         gaps_in = 5;

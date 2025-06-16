@@ -1,7 +1,7 @@
-{...}: {
+{lib, ...}: {
   programs.waybar = {
     enable = true;
-    settings.mainBar = {
+    settings.mainBar = lib.mkForce {
       height = 16;
       modules-left = [
         "image#nix-ico"
@@ -199,15 +199,13 @@
         };
       };
     };
-    style = ''
+    style = lib.mkForce ''
       * {
           font-family: logo-font, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
       }
 
       window#waybar {
           border-bottom: 1px solid #494d64;
-          border-bottom-left-radius: 0.5em;
-          border-bottom-right-radius: 0.5em;
       }
 
       #image {
@@ -233,6 +231,7 @@
 
       #workspaces button.active {
           color: #7c9e79;
+          border: none;
       }
 
       #workspaces button.urgent {
