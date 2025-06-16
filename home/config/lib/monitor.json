@@ -4,9 +4,9 @@
     "monitors": [
       {
         "serial": "",
-        "resolution": "3840x2400",
+        "resolution": "2880x1920@120.00Hz",
         "position": "0x0",
-        "zoom": "2"
+        "zoom": "1.5"
       }
     ]
   },
@@ -15,9 +15,9 @@
     "monitors": [
       {
         "serial": "",
-        "resolution": "3840x2400",
+        "resolution": "2880x1920@120.00Hz",
         "position": "900x1440",
-        "zoom": "2"
+        "zoom": "1.5"
       },
       {
         "serial": "1FRL3Z3",
@@ -32,9 +32,9 @@
     "monitors": [
       {
         "serial": "",
-        "resolution": "3840x2400",
+        "resolution": "2880x1920@120.00Hz",
         "position": "300x1440",
-        "zoom": "2"
+        "zoom": "1.5"
       },
       {
         "serial": "5TGKFH3",

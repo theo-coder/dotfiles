@@ -37,7 +37,7 @@ setup() {
         fi
     done
 
-    redraw
+    #redraw
     exit 0
 }
 
@@ -77,7 +77,7 @@ auto_apply() {
     if [ "$(echo $detected_serials | wc -w)" = "0" ]; then
         echo "No device detected, loading default..."
         hyprctl keyword monitor "eDP-1,preferred,auto,auto"
-        redraw
+        #redraw
     else
         jq -c '.[]' "$SCHEMES" | while read -r scheme; do
             scheme_name=$(echo "$scheme" | jq -r '.name')
