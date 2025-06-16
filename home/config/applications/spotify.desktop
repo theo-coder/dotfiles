@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Spotify
 Comment=Spotify Desktop application for Linux
-Exec=spotify --enable-features=UseOzonePlatform --ozone-platform=wayland --force-device-scale-factor=1.5 %U
+Exec=spotify --enable-features=UseOzonePlatform --ozone-platform=wayland %U
 Terminal=false
 Type=Application
 MimeType=x-scheme-handler/spotify;
