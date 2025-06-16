@@ -9,6 +9,7 @@
     ./gtk.nix
     ./waybar.nix
     ./applications.nix
+    ./git.nix
   ];
 
   home = rec {
@@ -26,16 +27,4 @@
   programs.home-manager.enable = true;
 
   systemd.user.startServices = "sd-switch";
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "application/xhtml+xml" = "zen.desktop";
-      "text/html" = "zen.desktop";
-      "text/xml" = "zen.desktop";
-      "x-scheme-handler/ftp" = "zen.desktop";
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
-    };
-  };
 }

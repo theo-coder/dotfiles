@@ -113,13 +113,9 @@
         "suppressevent maximize, class:.*"
         "pin,class:^(rofi)$"
       ];
-      # exec = [
-      #   "~/.local/bin/monitor"
-      # ];
-      # monitor = [
-      #   "eDP-1,2880x1920@120,300x1440,1.5"
-      #   "DP-9,2560x1440@60,0x0,1.0"
-      # ];
+      exec = [
+        "~/.local/bin/monitor"
+      ];
       exec-once = [
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -134,8 +130,6 @@
       ];
     };
     extraConfig = ''
-        monitor=eDP-1,2880x1920@120,300x1440,1.5
-        monitor=DP-9,2560x1440@60,0x0,1.0
       xwayland {
           force_zero_scaling = true
       }
