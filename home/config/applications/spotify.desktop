@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Spotify
-Comment=Spotify Desktop application for Linux
-Exec=spotify --enable-features=UseOzonePlatform --ozone-platform=wayland %U
-Terminal=false
-Type=Application
-MimeType=x-scheme-handler/spotify;
-Icon=spotify-client
-Categories=Audio;Music;Player;AudioVideo;

@@ -1,5 +1,27 @@
-{config, ...}: {
-  config = {
-    home.file.".local/share/applications".source = config.lib.file.mkOutOfStoreSymlink ../config/applications;
+{...}: {
+  config.home = {
+    file.".local/share/applications/spotify.desktop".text = ''
+      [Desktop Entry]
+      Name=Spotify
+      Comment=Spotify Desktop application for Linux
+      Exec=spotify --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+      Terminal=false
+      Type=Application
+      MimeType=x-scheme-handler/spotify;
+      Icon=spotify-client
+      Categories=Audio;Music;Player;AudioVideo;
+    '';
+
+    file.".local/share/applications/Mattermost.desktop".text = ''
+      [Desktop Entry]
+      Name=Mattermost
+      Comment=Mattermost Desktop application for Linux
+      Exec=mattermost-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+      Terminal=false
+      Type=Application
+      MimeType=x-scheme-handler/mattermost
+      Icon=mattermost-desktop
+      Categories=Network;InstantMessaging;
+    '';
   };
 }

@@ -15,6 +15,7 @@
     zip
     unzip
     spotify
+    thunderbird
     ncspot
     playerctl
     gimp
