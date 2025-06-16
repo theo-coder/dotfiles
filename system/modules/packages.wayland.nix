@@ -26,7 +26,7 @@
     mpv
     vlc
     libreoffice-qt
-    rofi
+    rofi-wayland
     fzf
     ripgrep
     powertop

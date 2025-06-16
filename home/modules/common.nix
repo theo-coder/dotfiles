@@ -8,6 +8,7 @@
     ./hyprland.nix
     ./gtk.nix
     ./waybar.nix
+    ./applications.nix
   ];
 
   home = rec {
@@ -16,6 +17,10 @@
     file.".local/bin".source = config.lib.file.mkOutOfStoreSymlink ../config/bin;
     file.".local/lib".source = config.lib.file.mkOutOfStoreSymlink ../config/lib;
     file.".local/assets".source = config.lib.file.mkOutOfStoreSymlink ../../assets;
+    file.".config/electron-flags.conf".text = ''
+      --enable-features=UseOzonePlatform
+      --ozone-platform=wayland
+    '';
   };
 
   programs.home-manager.enable = true;
