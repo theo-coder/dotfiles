@@ -56,6 +56,7 @@ return {
 					vim.keymap.set("n", "gD", "<cmd>Telescope lsp_declarations<cr>")
 					vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<cr>")
 					vim.keymap.set("n", "gb", "<cmd>Telescope lsp_type_definitions<cr>")
+                    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 					vim.keymap.set("n", "K", vim.lsp.buf.hover)
 					vim.keymap.set("n", "gK", vim.lsp.buf.signature_help)
 					vim.keymap.set("n", "<leader>dn", function()
