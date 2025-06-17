@@ -14,6 +14,7 @@
     cliphist
     hypridle
     poweralertd
+    hyprlock
   ];
 
   nix.settings = {
