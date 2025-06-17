@@ -22,6 +22,7 @@
     ./ectool.nix
     ./wayland.nix
     ./ia.nix
+    ./docker.nix
   ];
 
   services.dbus.enable = true;

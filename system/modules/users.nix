@@ -1,6 +1,6 @@
 {...}: {
   users.users.theo = {
     isNormalUser = true;
-    extraGroups = ["wheel" "video"];
+    extraGroups = ["wheel" "video" "docker"];
   };
 }
