@@ -21,6 +21,7 @@
     ./users.nix
     ./ectool.nix
     ./wayland.nix
+    ./ia.nix
   ];
 
   services.dbus.enable = true;
