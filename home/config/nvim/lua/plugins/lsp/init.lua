@@ -12,19 +12,6 @@ return {
 		config = function()
             local lspconfig = require("lspconfig")
 
-            lspconfig.hls.setup({
-                cmd = { "haskell-language-server-wrapper", "--lsp" }
-            })
-
-            vim.filetype.add({
-                filename = {
-                    [".xmobarrc"] = "haskell"
-                },
-                pattern = {
-                    [".*%xmobarrc"] = "haskell"
-                }
-            })
-
 			require("mason").setup({})
 
 			require("mason-lspconfig").setup({
