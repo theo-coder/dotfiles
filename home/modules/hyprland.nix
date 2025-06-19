@@ -112,6 +112,8 @@
       windowrule = [
         "suppressevent maximize, class:.*"
         "pin,class:^(rofi)$"
+        "float,title:^(Calls Widget)$"
+        "noborder,title:^(Calls Widget)$"
       ];
       exec = [
         "~/.local/bin/monitor"
