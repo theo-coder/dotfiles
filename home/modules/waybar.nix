@@ -14,6 +14,7 @@
         "network"
         "group/expand-3"
         "upower"
+        "upower#headset"
         "memory"
         "cpu"
         "clock"
@@ -112,7 +113,7 @@
         format = "{icon}";
         rotate = 0;
         format-muted = "婢";
-        tooltip-format = "{icon} {desc} // {volume}%";
+        tooltip-format = "{icon}   {desc} // {volume}%";
         scroll-step = 5;
         format-icons = {
           headphone = "";
@@ -136,11 +137,17 @@
         scroll-step = 1;
       };
       upower = {
-        icon-size = 20;
-        format = "";
-        tooltip = true;
-        tooltip-spacing = 20;
-        on-click-right = "pkill waybar & hyprctl dispatch exec waybar";
+        format = "󰁹 {percentage}";
+        tooltip = false;
+        show-icon = false;
+        on-click-right = "pkill waybar & pkill .waybar-wrapped & hyprctl dispatch exec waybar";
+      };
+      "upower#headset" = {
+        native-path = "/org/bluez/hci0/dev_F8_4E_17_BC_B6_66";
+        format = "  {percentage}";
+        tooltip = false;
+        show-icon = false;
+        hide-if-empty = true;
       };
       memory = {
         interval = 1;
@@ -310,9 +317,10 @@
 
       #upower#headset,
       #upower {
-          font-size: 19px;
+          font-size: 15px;
           color: #a6d189;
           margin-right: 0.2em;
+          margin-left: 0.5em;
       }
 
       #memory {
