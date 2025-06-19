@@ -1,9 +1,0 @@
----
-extends: default
-
-rules:
-  quoted-strings:
-    quote-type: double
-    required: only-when-needed
-  line-length:
-    max: 150
