@@ -12,7 +12,7 @@
 
     #override = { base00 = "#000000"; };
 
-    image = ../../assets/wallpapers/0290.jpg;
+    # image = ../../assets/wallpapers/0290.jpg;
     polarity = "dark";
 
     fonts = rec {

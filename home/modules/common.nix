@@ -21,6 +21,11 @@
       --enable-features=UseOzonePlatform
       --ozone-platform=wayland
     '';
+    file.".config/wpaperd/config.toml".text = ''
+      [default]
+      mode = "center"
+      path = "/home/theo/Images/wallpapers/landscape/"
+    '';
   };
 
   programs.home-manager.enable = true;

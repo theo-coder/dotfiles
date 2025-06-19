@@ -21,6 +21,7 @@
     gimp
     neohtop
     gthumb
+    wpaperd
     libnotify
     pcmanfm
     gping
