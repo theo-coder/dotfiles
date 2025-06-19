@@ -1,0 +1,19 @@
+#!/bin/sh
+
+connected=$(bluetoothctl info | grep -A 29 WH-1000XM4)
+
+if [ ! -n "$connected" ]; then
+    echo ""
+    exit 0
+fi
+
+if [ "$1" == "icon" ]; then
+    echo "󰥰"
+    exit 0
+fi
+
+usage=$(echo "$connected" | grep "Battery Percentage" | awk -F '(' '{ print $2 }' | sed s/\)//)
+
+result="‎ ‎ ‎ ‎$usage% ‎ ‎"
+
+echo $result

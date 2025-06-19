@@ -1,0 +1,21 @@
+#!/bin/sh
+
+usage=$(free | grep Mem | awk '{printf("%.1f"), ($3/$2) * 100.0}')
+
+result=$(echo "$usage" | awk '
+{
+    if ($1 < 10) print "󰝦 "
+    else if ($1 < 20) print "󰪞 "
+    else if ($1 < 30) print "󰪟 "
+    else if ($1 < 40) print "󰪠 "
+    else if ($1 < 50) print "󰪠 "
+    else if ($1 < 60) print "󰪡 "
+    else if ($1 < 70) print "󰪢 "
+    else if ($1 < 80) print "󰪣 "
+    else if ($1 < 90) print "󰪤 "
+    else print "󰪥 "
+}
+')
+
+
+echo $result
