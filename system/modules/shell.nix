@@ -28,7 +28,6 @@
     pinentry-tty
     bat-extras.batman
     bat-extras.batwatch
-    tmux
     sysz
     systemctl-tui
     chafa

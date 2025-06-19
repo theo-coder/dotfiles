@@ -23,6 +23,7 @@
     ./wayland.nix
     ./ia.nix
     ./docker.nix
+    ./tmux.nix
   ];
 
   services.dbus.enable = true;
