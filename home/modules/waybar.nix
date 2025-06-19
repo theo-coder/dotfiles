@@ -240,8 +240,8 @@
 
       #custom-arrow {
           font-weight: bold;
-          margin: 0 1em 0 0.5em;
-          font-size: 1.5em;
+          margin: 0 1em 0.25em 0.5em;
+          font-size: 1.25em;
       }
 
       #window {

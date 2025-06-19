@@ -4,7 +4,7 @@
     "monitors": [
       {
         "serial": "",
-        "resolution": "2880x1920@120.00Hz",
+        "resolution": "2880x1920",
         "position": "0x0",
         "zoom": "1.5"
       }
