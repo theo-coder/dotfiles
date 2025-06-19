@@ -26,4 +26,5 @@
   ];
 
   services.dbus.enable = true;
+  services.upower.enable = true;
 }

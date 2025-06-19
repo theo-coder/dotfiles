@@ -19,7 +19,7 @@
         "clock"
       ];
       "image#nix-ico" = {
-        path = "~/.local/assets/nix.png";
+        path = "${../../assets/nix.png}";
         size = 16;
       };
       "hyprland/workspaces" = {
