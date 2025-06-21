@@ -53,6 +53,7 @@
       dwindle = {
         pseudotile = true;
         preserve_split = true;
+        force_split = 2;
       };
       master.new_status = "master";
       misc = {
@@ -114,6 +115,7 @@
         "pin,class:^(rofi)$"
         "float,title:^(Calls Widget)$"
         "noborder,title:^(Calls Widget)$"
+        "float,class:Emulator"
       ];
       exec = [
         "~/.local/bin/monitor"

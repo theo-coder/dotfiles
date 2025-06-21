@@ -28,9 +28,14 @@
     openssl
     openssl.dev
     pkg-config
+    android-studio
+    jdk
+    sqlite
+    sqlitebrowser
   ];
 
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    QT_SCREEN_SCALE_FACTORS = "0.75";
   };
 }
