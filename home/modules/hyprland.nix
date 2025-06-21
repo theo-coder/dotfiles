@@ -116,6 +116,7 @@
         "float,title:^(Calls Widget)$"
         "noborder,title:^(Calls Widget)$"
         "float,class:Emulator"
+        "float,title:^(Welcome to Android Studio)$"
       ];
       exec = [
         "~/.local/bin/monitor"
