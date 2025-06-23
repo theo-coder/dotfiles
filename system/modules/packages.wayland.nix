@@ -37,6 +37,7 @@
     brightnessctl
     dunst
     mattermost-desktop
+    obsidian
   ];
 
   programs.nm-applet.enable = true;
