@@ -83,6 +83,7 @@
           "$mod, J, movefocus, d"
           "$mod, K, movefocus, u"
           "$mod, L, movefocus, r"
+          "$mod, V, exec, $terminal --class clipse -e 'clipse'"
           "$mod, S, togglespecialworkspace, scratchpad"
           "$mod SHIFT, S, movetoworkspace, special:scratchpad"
         ]
@@ -117,6 +118,8 @@
         "noborder,title:^(Calls Widget)$"
         "float,class:Emulator"
         "float,title:^(Welcome to Android Studio)$"
+        "float,class:(clipse)"
+        "size 800 650,class:(clipse)"
       ];
       exec = [
         "~/.local/bin/monitor"
@@ -127,8 +130,7 @@
         "systemctl --user start hyprpolkitagent"
 
         "poweralertd &"
-        "wl-clip-persist --clipboard both &"
-        "wl-paste --watch cliphist store &"
+        "clipse -listen"
         "waybar &"
         "dunst &"
         "hypridle"

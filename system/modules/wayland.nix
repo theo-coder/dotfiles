@@ -11,7 +11,7 @@
     grim
     hyprpolkitagent
     wl-clip-persist
-    cliphist
+    clipse
     hypridle
     poweralertd
     hyprlock
