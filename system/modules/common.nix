@@ -24,6 +24,7 @@
     ./ia.nix
     ./docker.nix
     ./tmux.nix
+    ./games.nix
   ];
 
   services.dbus.enable = true;
