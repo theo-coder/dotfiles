@@ -14,7 +14,6 @@
     ./nix.nix
     ./packages.wayland.nix
     # ./picom.nix
-    ./python.nix
     ./shell.nix
     ./sound.nix
     ./stylix.nix
