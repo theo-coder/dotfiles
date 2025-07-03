@@ -38,6 +38,7 @@
     dunst
     mattermost-desktop
     obsidian
+    beeper
   ];
 
   programs.nm-applet.enable = true;

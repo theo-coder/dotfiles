@@ -110,6 +110,20 @@
       Name=Friends
       Exec=steam --ozone-platform=wayland --enable-features=UseOzonePlatform steam://open/friends
     '';
+
+    file.".local/share/applications/beepertexts.desktop".text = ''
+      [Desktop Entry]
+      Name=Beeper
+      Exec=beeper --no-sandbox --ozone-platform=wayland --enable-features=UseOzonePlatform %U
+      Terminal=false
+      Type=Application
+      Icon=beepertexts
+      StartupWMClass=Beeper
+      X-AppImage-Version=4.0.747
+      Comment=The ultimate messaging app
+      MimeType=x-scheme-handler/beeper;
+      Categories=Network;
+    '';
   };
 
   # xdg.mimeApps = {
