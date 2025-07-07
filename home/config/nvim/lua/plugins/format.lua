@@ -16,6 +16,7 @@ return {
 				yaml = { "prettier" },
 				python = { "black" },
 				nix = { "alejandra" },
+				rust = { "rustfmt", lsp_format = "fallback" },
 			},
 			format_on_save = format_options,
 		})

@@ -5,6 +5,7 @@
     gnumake
     go
     cargo
+    rustfmt
     luarocks
     stylua
     tree-sitter
@@ -32,7 +33,12 @@
     jdk
     sqlite
     sqlitebrowser
+    code-cursor
+    jmtpfs
+    android-tools
   ];
+
+  programs.adb.enable = true;
 
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";

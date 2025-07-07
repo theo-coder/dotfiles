@@ -124,6 +124,27 @@
       MimeType=x-scheme-handler/beeper;
       Categories=Network;
     '';
+
+    file.".local/share/applications/cursor.desktop".text = ''
+      [Desktop Entry]
+      Actions=new-empty-window
+      Categories=Utility;TextEditor;Development;IDE
+      Comment=Code Editing. Redefined.
+      Exec=cursor --ozone-platform=wayland --enable-features=UseOzonePlatform %F
+      GenericName=Text Editor
+      Icon=cursor
+      Keywords=vscode
+      Name=Cursor
+      StartupNotify=true
+      StartupWMClass=cursor
+      Type=Application
+      Version=1.4
+
+      [Desktop Action new-empty-window]
+      Exec=cursor --ozone-platform=wayland --enable-features=UseOzonePlatform --new-window %F
+      Icon=cursor
+      Name=New Empty Window
+    '';
   };
 
   # xdg.mimeApps = {

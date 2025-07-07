@@ -39,6 +39,7 @@
     mattermost-desktop
     obsidian
     beeper
+    hostctl
   ];
 
   programs.nm-applet.enable = true;
