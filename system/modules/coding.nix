@@ -36,6 +36,10 @@
     code-cursor
     jmtpfs
     android-tools
+    vscode
+    k3sup
+    kubectl
+    kubernetes-helm
   ];
 
   programs.adb.enable = true;

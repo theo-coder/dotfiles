@@ -40,6 +40,10 @@
     obsidian
     beeper
     hostctl
+    rpi-imager
+    dig
+    nmap
+    wireguard-tools
   ];
 
   programs.nm-applet.enable = true;

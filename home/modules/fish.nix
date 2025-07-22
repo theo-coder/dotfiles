@@ -34,6 +34,10 @@
         # Nixos
         nrs = "sudo nixos-rebuild switch --flake /etc/nixos";
 
+        # VPN
+        vpn-up = "sudo wg-quick up wg-home";
+        vpn-down = "sudo wg-quick down wg-home";
+
         # Navigation
         ".." = "cd ..";
         "..." = "cd ../..";
