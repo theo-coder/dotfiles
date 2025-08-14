@@ -32,7 +32,7 @@
 
       shellAliases = {
         # Nixos
-        nrs = "sudo nixos-rebuild switch --flake /etc/nixos";
+        nrs = "sudo nixos-rebuild switch --flake /etc/nixos --impure";
 
         # VPN
         vpn-up = "sudo wg-quick up wg-home";

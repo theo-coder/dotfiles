@@ -15,6 +15,7 @@
     delta
     pyright
     cargo
+    clippy
     rustc
     rust-analyzer
     taplo
@@ -40,6 +41,7 @@
     k3sup
     kubectl
     kubernetes-helm
+    kustomize
   ];
 
   programs.adb.enable = true;

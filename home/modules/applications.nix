@@ -12,6 +12,14 @@
       Categories=Audio;Music;Player;AudioVideo;
     '';
 
+    file.".local/share/applications/prism-launcher.desktop".text = ''
+      [Desktop Entry]
+      Name=Prism Launcher
+      Exec=prismlauncher %U
+      Terminal=false
+      Type=Application
+    '';
+
     file.".local/share/applications/Mattermost.desktop".text = ''
       [Desktop Entry]
       Name=Mattermost

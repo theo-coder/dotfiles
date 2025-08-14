@@ -44,6 +44,8 @@
     dig
     nmap
     wireguard-tools
+    nss
+    localsend
   ];
 
   programs.nm-applet.enable = true;

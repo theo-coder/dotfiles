@@ -15,6 +15,10 @@
     hypridle
     poweralertd
     hyprlock
+    faac
+    faad2
+    glib
+    gvfs
   ];
 
   nix.settings = {
@@ -50,5 +54,23 @@
       hyprland.default = ["gtk" "hyprland"];
     };
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      mesa
+      libva
+      libva-utils
+      vaapiVdpau
+      libvdpau-va-gl
+      amdvlk
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      mesa
+      libva
+      amdvlk
+    ];
   };
 }
