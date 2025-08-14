@@ -29,11 +29,10 @@
 
   services.greetd = {
     enable = true;
-    vt = 3;
     settings = {
       default_session = {
         user = "theo";
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
       };
     };
   };

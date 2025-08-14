@@ -17,7 +17,7 @@
     cargo
     clippy
     rustc
-    rust-analyzer
+    rustup
     taplo
     marksman
     alejandra
