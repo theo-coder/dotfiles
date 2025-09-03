@@ -28,6 +28,7 @@
 
         pyenv init - fish | source
         zoxide init fish | source
+        source "$HOME/.cargo/env.fish"
       '';
 
       shellAliases = {

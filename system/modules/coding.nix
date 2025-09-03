@@ -5,7 +5,6 @@
     gnumake
     go
     cargo
-    rustfmt
     luarocks
     stylua
     tree-sitter
@@ -16,8 +15,6 @@
     pyright
     cargo
     clippy
-    rustc
-    rustup
     taplo
     marksman
     alejandra

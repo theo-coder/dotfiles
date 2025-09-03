@@ -46,6 +46,8 @@
     wireguard-tools
     nss
     localsend
+    kdePackages.kdenlive
+    audacity
   ];
 
   programs.nm-applet.enable = true;
