@@ -19,7 +19,7 @@
     ncspot
     playerctl
     gimp
-    neohtop
+    #neohtop
     gthumb
     wpaperd
     libnotify

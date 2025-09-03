@@ -17,9 +17,9 @@
     lshw
   ];
 
-  services.logind = {
-    powerKey = "suspend";
-    lidSwitch = "suspend";
+  services.logind.settings.Login = {
+    HandlePowerKey = "suspend";
+    HandleLidSwitch = "suspend";
   };
 
   services.devmon.enable = true;
