@@ -50,7 +50,17 @@
     audacity
   ];
 
-  programs.nm-applet.enable = true;
+  programs = {
+    nm-applet.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+      package = pkgs.appimage-run.override {
+        extraPkgs = pkgs: [pkgs.xorg.libxshmfence];
+      };
+    };
+  };
+
   powerManagement.enable = true;
   services.fwupd.enable = true;
   programs.light.enable = true;

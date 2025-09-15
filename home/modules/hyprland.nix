@@ -67,7 +67,6 @@
         sensitivity = 0;
         touchpad.natural_scroll = false;
       };
-      gestures.workspace_swipe = true;
       bind =
         [
           "$mod, Return, exec, $terminal"
