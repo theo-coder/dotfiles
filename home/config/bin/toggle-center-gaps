@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+current_gap=$(hyprctl getoption general:gaps_out | grep "int" | awk '{print $2}')
+
+if [ "$current_gap" -eq 10 ]; then
+    hyprctl keyword general:gaps_out 10,200,10,200
+else
+    hyprctl keyword general:gaps_out 10
+fi
+
