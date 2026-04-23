@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ipcode=`curl -s https://get.geojs.io/v1/ip/country/$1`
+resp=`curl -s https://restcountries.com/v3.1/alpha/$ipcode`
+
+echo $resp | jq .[0].translations.fra.common
