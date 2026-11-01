@@ -11,8 +11,8 @@
 
 This NixOS configuration uses the **Dendritic Pattern** (`flake-parts` + `import-tree`) coupled with **GNU Stow** for user dotfiles:
 - Every `.nix` file under `modules/` is a `flake-parts` module representing a single feature/aspect (`flake.modules.nixos.<aspect>`).
-- User dotfiles (`niri`, `nvim`, `fish`, `starship`, `kitty`, `git`, `hypr`, `waybar`, scripts, custom `.desktop` entries) live in `configs/` (mirroring `$HOME`) and are symlinked via **GNU Stow** (`stow --no-folding`).
-- Desktop stack: **Niri** + **Dux Shell (Quickshell)** + **Dux Greeter**, alongside **Hyprland** selectable at login.
+- User dotfiles (`niri`, `nvim`, `fish`, `starship`, `kitty`, `git`, scripts, custom `.desktop` entries) live in `configs/` (mirroring `$HOME`) and are symlinked via **GNU Stow** (`stow --no-folding`).
+- Desktop stack: **Niri** + **Dux Shell (Quickshell)** + **Dux Greeter**.
 
 ```text
 .
@@ -20,14 +20,14 @@ This NixOS configuration uses the **Dendritic Pattern** (`flake-parts` + `import
 ├── secrets.example.nix   # Template for local secrets & personal info
 ├── assets/
 ├── configs/              # GNU Stow package targeting ~
-│   ├── .config/          # fish, git, gtk, hypr, kitty, niri, nvim, starship, waybar, wpaperd
-│   └── .local/           # bin, lib, share/applications
+│   ├── .config/          # fish, git, gtk, kitty, niri, nvim, starship
+│   └── .local/           # bin, share/applications
 └── modules/              # Auto-imported flake-parts aspect modules
     ├── flake/            # Flake metadata & local secrets option
     ├── hosts/alpha/      # Host composition & hardware config
     ├── users/            # User account & automatic GNU Stow activation
     ├── system/           # Boot, Nix, Locale, Network & hybrid /etc/hosts, Audio, Bluetooth, Power
-    ├── desktop/          # Niri, Dux Shell, Dux Greeter, Hyprland, Stylix, Common desktop
+    ├── desktop/          # Niri, Dux Shell, Dux Greeter, Stylix, Common desktop
     └── programs/         # Shell, Terminal, CLI, Git, Nvim, Coding, Browser, Games, AI
 ```
 

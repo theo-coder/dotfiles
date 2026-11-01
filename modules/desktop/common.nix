@@ -71,13 +71,8 @@
       xdg.portal = {
         enable = true;
         xdgOpenUsePortal = true;
-        wlr.enable = true;
         config = {
           common.default = [ "gtk" ];
-          hyprland.default = [
-            "gtk"
-            "hyprland"
-          ];
           niri.default = [
             "gnome"
             "gtk"

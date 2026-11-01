@@ -126,7 +126,7 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    // Core applications (matching Hyprland workflow)
+    // Core applications
     Mod+Return hotkey-overlay-title="Open Terminal (kitty)" { spawn "kitty"; }
     Mod+Shift+Q repeat=false hotkey-overlay-title="Close Window" { close-window; }
     Mod+O hotkey-overlay-title="Toggle Handy Transcription" {
@@ -161,8 +161,8 @@ binds {
     Mod+Shift+E hotkey-overlay-title="Power Menu" {
         spawn "dms" "ipc" "call" "powermenu" "toggle";
     }
-    Mod+P hotkey-overlay-title="Color Picker (hyprpicker)" {
-        spawn "hyprpicker" "--autocopy";
+    Mod+P hotkey-overlay-title="Color Picker" {
+        spawn "dms" "color" "pick" "-a";
     }
 
     // Audio & Brightness via DMS OSD
