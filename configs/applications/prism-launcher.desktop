@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Prism Launcher
+Exec=prismlauncher %U
+Icon=org.prismlauncher.PrismLauncher
+Categories=Game;
+Terminal=false
+Type=Application

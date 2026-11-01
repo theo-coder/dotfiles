@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=BalenaEtcher
+Exec=appimage-run /home/theo/Applications/balenaEtcher-1.18.11-x64.AppImage
+Type=Application
+Comment=BalenaEtcher
+Icon=utilities-terminal
+Categories=Utility;
+Terminal=false

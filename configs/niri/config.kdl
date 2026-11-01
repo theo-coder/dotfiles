@@ -1,0 +1,270 @@
+// Niri configuration managed via ~/nixos/configs/niri/config.kdl
+// Includes Dux Shell (DMS) dynamic configuration fragments at the bottom.
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "ctrl:nocaps,compose:rctrl"
+        }
+    }
+
+    touchpad {
+        tap
+        dwt
+    }
+
+    focus-follows-mouse max-scroll-amount="0%"
+}
+
+// Default internal display (Framework 13); DMS manages dynamic layouts in dms/outputs.kdl
+output "eDP-1" {
+    mode "2880x1920@120.000"
+    scale 1.5
+}
+
+// Named workspaces 1..9 so they can be shared and summoned across monitors
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+workspace "9"
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+layout {
+    center-focused-column "never"
+    background-color "transparent"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 2
+        active-color "#33ccff"
+        inactive-color "#595959"
+    }
+
+    border {
+        off
+    }
+}
+
+prefer-no-csd
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+screenshot-path "~/Images/captures/screenshot-%Y%m%d-%H%M%S.png"
+
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    NIXOS_OZONE_WL "1"
+    DMS_HIDE_TRAYIDS "spotify-client,spotify"
+}
+
+spawn-at-startup "sh" "-c" "appimage-run /home/theo/Applications/Handy_0.9.6_amd64.AppImage --start-hidden"
+
+// Layer rules for Dux Shell wallpaper & backdrop integration
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
+// Window rules
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id=r#"^dev\.duxlabs\.shell$"#
+    open-floating true
+}
+
+window-rule {
+    match title="^Calls Widget$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="Emulator"
+    open-floating true
+}
+
+window-rule {
+    match title="^Welcome to Android Studio$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="clipse"
+    open-floating true
+    default-column-width { fixed 800; }
+    default-window-height { fixed 650; }
+}
+
+window-rule {
+    match title="^Opération sur des fichiers en cours$"
+    open-floating true
+}
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Core applications (matching Hyprland workflow)
+    Mod+Return hotkey-overlay-title="Open Terminal (kitty)" { spawn "kitty"; }
+    Mod+Shift+Q repeat=false hotkey-overlay-title="Close Window" { close-window; }
+    Mod+O hotkey-overlay-title="Toggle Handy Transcription" {
+        spawn "appimage-run" "/home/theo/Applications/Handy_0.9.6_amd64.AppImage" "--toggle-transcription";
+    }
+
+    // Dux Shell (DMS) IPC actions
+    Mod+Space hotkey-overlay-title="Application Launcher" {
+        spawn "dms" "ipc" "call" "spotlight" "toggle";
+    }
+    Mod+Shift+Return hotkey-overlay-title="Application Launcher" {
+        spawn "dms" "ipc" "call" "spotlight" "toggle";
+    }
+    Mod+V hotkey-overlay-title="Clipboard Manager" {
+        spawn "dms" "ipc" "call" "clipboard" "toggle";
+    }
+    Mod+M hotkey-overlay-title="Task Manager" {
+        spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+    }
+    Mod+Comma hotkey-overlay-title="Settings" {
+        spawn "dms" "ipc" "call" "settings" "focusOrToggle";
+    }
+    Mod+N hotkey-overlay-title="Notification Center" {
+        spawn "dms" "ipc" "call" "notifications" "toggle";
+    }
+    Mod+Y hotkey-overlay-title="Browse Wallpapers" {
+        spawn "dms" "ipc" "call" "dankdash" "wallpaper";
+    }
+    Mod+X hotkey-overlay-title="Lock Screen" {
+        spawn "dms" "ipc" "call" "lock" "lock";
+    }
+    Mod+Shift+E hotkey-overlay-title="Power Menu" {
+        spawn "dms" "ipc" "call" "powermenu" "toggle";
+    }
+    Mod+P hotkey-overlay-title="Color Picker (hyprpicker)" {
+        spawn "hyprpicker" "--autocopy";
+    }
+
+    // Audio & Brightness via DMS OSD
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "increment" "5";
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "decrement" "5";
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "mute";
+    }
+    XF86AudioMicMute allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "micmute";
+    }
+    XF86MonBrightnessUp allow-when-locked=true {
+        spawn "dms" "ipc" "call" "brightness" "increment" "10" "";
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+        spawn "dms" "ipc" "call" "brightness" "decrement" "10" "";
+    }
+
+    // Screenshots
+    Print { screenshot-screen; }
+    Shift+Print { screenshot; }
+    Mod+Shift+Print { screenshot-window; }
+
+    // Focus navigation (Vim keys + Arrows)
+    Mod+H     { focus-column-left; }
+    Mod+L     { focus-column-right; }
+    Mod+J     { focus-window-or-workspace-down; }
+    Mod+K     { focus-window-or-workspace-up; }
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Down  { focus-window-or-workspace-down; }
+    Mod+Up    { focus-window-or-workspace-up; }
+
+    // Move windows/columns
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+L     { move-column-right; }
+    Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+
+    // Column & Window sizing
+    Mod+C           { center-column; }
+    Mod+F           { maximize-column; }
+    Mod+Shift+F     { fullscreen-window; }
+    Mod+R           { switch-preset-column-width; }
+    Mod+Minus       { set-column-width "-10%"; }
+    Mod+Equal       { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+W           { toggle-column-tabbed-display; }
+    Mod+Shift+Space { toggle-window-floating; }
+    Mod+Tab         { toggle-overview; }
+
+    // Workspaces 1..9 (shared across monitors: summons/swaps workspace on focused monitor)
+    Mod+1 { spawn "/home/theo/.local/bin/niri-shared-ws" "1"; }
+    Mod+2 { spawn "/home/theo/.local/bin/niri-shared-ws" "2"; }
+    Mod+3 { spawn "/home/theo/.local/bin/niri-shared-ws" "3"; }
+    Mod+4 { spawn "/home/theo/.local/bin/niri-shared-ws" "4"; }
+    Mod+5 { spawn "/home/theo/.local/bin/niri-shared-ws" "5"; }
+    Mod+6 { spawn "/home/theo/.local/bin/niri-shared-ws" "6"; }
+    Mod+7 { spawn "/home/theo/.local/bin/niri-shared-ws" "7"; }
+    Mod+8 { spawn "/home/theo/.local/bin/niri-shared-ws" "8"; }
+    Mod+9 { spawn "/home/theo/.local/bin/niri-shared-ws" "9"; }
+
+    Mod+Shift+1 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "1"; }
+    Mod+Shift+2 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "2"; }
+    Mod+Shift+3 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "3"; }
+    Mod+Shift+4 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "4"; }
+    Mod+Shift+5 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "5"; }
+    Mod+Shift+6 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "6"; }
+    Mod+Shift+7 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "7"; }
+    Mod+Shift+8 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "8"; }
+    Mod+Shift+9 { spawn "/home/theo/.local/bin/niri-shared-ws" "move" "9"; }
+
+    // Mouse wheel scrolling through columns/workspaces
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+WheelScrollRight                     { focus-column-right; }
+    Mod+WheelScrollLeft                      { focus-column-left; }
+}
+
+// Dux Shell managed configuration includes
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/binds.kdl"
+include "dms/input.kdl"
+include "dms/outputs.kdl"
+include "dms/windowrules.kdl"
+include "dms/cursor.kdl"
+include "dms/wpblur.kdl"

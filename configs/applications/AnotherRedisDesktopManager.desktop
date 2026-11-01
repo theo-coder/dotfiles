@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=AnotherRedisDesktopManager
+Exec=appimage-run /home/theo/Applications/Another-Redis-Desktop-Manager-linux-1.7.1-x86_64.AppImage
+Type=Application
+Comment=AnotherRedisDesktopManager
+Icon=utilities-terminal
+Categories=Utility;
+Terminal=false

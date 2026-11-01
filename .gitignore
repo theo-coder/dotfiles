@@ -7,7 +7,7 @@ result-*
 *.backup
 
 # Local secrets (non-tracked)
-secrets.nix
+/secrets.nix
 secrets/
 *.secret
 .env

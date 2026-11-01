@@ -4,7 +4,26 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    import-tree.url = "github:vic/import-tree";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms = {
+      url = "github:duxlabs-dev/dux-shell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dux-greeter = {
+      url = "github:duxlabs-dev/dux-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     hyprland.url = "github:hyprwm/Hyprland";
 
@@ -29,60 +48,17 @@
       };
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zen-browser.url = "github:youwen5/zen-browser-flake";
 
     stylix = {
       url = "github:danth/stylix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nur.url = "github:nix-community/NUR";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      nixos-hardware,
-      home-manager,
-      nur,
-      ...
-    }@inputs:
-    let
-      inherit (self) outputs;
-      inherit (nixpkgs.lib) nixosSystem;
-      localSecretsPath = /home/theo/nixos/secrets.nix;
-      secrets =
-        if builtins.pathExists localSecretsPath then
-          import localSecretsPath
-        else if builtins.pathExists ./secrets.nix then
-          import ./secrets.nix
-        else
-          import ./secrets.example.nix;
-      specialArgs = {
-        inherit inputs outputs secrets;
-        system = "x86_64-linux";
-      };
-    in
-    {
-      nixosConfigurations.alpha = nixosSystem {
-        specialArgs = specialArgs;
-        modules = [
-          home-manager.nixosModules.home-manager
-          nur.modules.nixos.default
-          {
-            home-manager.users.theo = import ./system/alpha/home.nix;
-            home-manager.extraSpecialArgs = specialArgs;
-          }
-          ./system/alpha/configuration.nix
-        ];
-      };
-    };
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Handy
+Comment=Handy
+Exec=appimage-run /home/theo/Applications/Handy_0.9.6_amd64.AppImage
+Terminal=false
+Type=Application
