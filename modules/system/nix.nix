@@ -1,12 +1,11 @@
-{ inputs, ... }:
-{
+{ inputs, ... }: {
   flake.modules.nixos.nix = {
     nixpkgs = {
       config = {
         allowUnfree = true;
         permittedInsecurePackages = [
           "electron-39.8.10"
-          "beekeeper-studio-6.1.1"
+          "beekeeper-studio-6.1.4"
         ];
       };
       overlays = [
