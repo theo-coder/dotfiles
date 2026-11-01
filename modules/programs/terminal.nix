@@ -74,14 +74,4 @@
         '';
       };
     };
-
-  flake.modules.homeManager.terminal =
-    { ... }:
-    {
-      programs.kitty.enable = true;
-      home.file.".config/kitty" = {
-        source = ../../configs/kitty;
-        recursive = true;
-      };
-    };
 }

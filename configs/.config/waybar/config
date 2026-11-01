@@ -1,0 +1,206 @@
+[
+  {
+    "clock": {
+      "actions": {
+        "on-click-backward": "tz_down",
+        "on-click-forward": "tz_up",
+        "on-click-right": "mode",
+        "on-scroll-down": "shift_down",
+        "on-scroll-up": "shift_up"
+      },
+      "calendar": {
+        "format": {
+          "months": "<span color='#ffead3'><b>{}</b></span>",
+          "today": "<span color='#ff6699'><b>{}</b></span>",
+          "weekdays": "<span color='#ffcc66'><b>{}</b></span>"
+        },
+        "mode": "month",
+        "mode-mon-col": 3,
+        "on-click-right": "mode",
+        "on-scroll": 1
+      },
+      "format": "{:%I:%M %p}",
+      "rotate": 0,
+      "tooltip-format": "<tt>{calendar}</tt>"
+    },
+    "cpu": {
+      "format": "{icon}",
+      "format-icons": [
+        "󰝦",
+        "󰪞",
+        "󰪟",
+        "󰪠",
+        "󰪡",
+        "󰪢",
+        "󰪣",
+        "󰪤",
+        "󰪥"
+      ],
+      "interval": 1,
+      "rotate": 270
+    },
+    "custom/arrow": {
+      "format": ">"
+    },
+    "custom/menu": {
+      "format": "󰅃",
+      "rotate": 90
+    },
+    "group/expand": {
+      "drawer": {
+        "children-class": "not-power",
+        "transition-duration": 600,
+        "transition-to-left": true
+      },
+      "modules": [
+        "custom/menu",
+        "tray"
+      ],
+      "orientation": "horizontal"
+    },
+    "group/expand-3": {
+      "drawer": {
+        "children-class": "not-power",
+        "click-to-reveal": true,
+        "transition-duration": 600,
+        "transition-to-left": true
+      },
+      "modules": [
+        "pulseaudio",
+        "pulseaudio/slider"
+      ],
+      "orientation": "horizontal"
+    },
+    "height": 16,
+    "hyprland/window": {
+      "format": "{}",
+      "separate-outputs": true
+    },
+    "hyprland/workspaces": {
+      "all-outputs": true,
+      "format": "{icon}",
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "5": "",
+        "6": "",
+        "7": "",
+        "8": "",
+        "default": "",
+        "focused": "",
+        "urgent": ""
+      },
+      "persistent-workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": []
+      },
+      "sort-by-number": true
+    },
+    "image#nix-ico": {
+      "path": "/home/theo/nixos/assets/nix.png",
+      "size": 16
+    },
+    "memory": {
+      "format": "{icon}",
+      "format-icons": [
+        "󰝦",
+        "󰪞",
+        "󰪟",
+        "󰪠",
+        "󰪡",
+        "󰪢",
+        "󰪣",
+        "󰪤",
+        "󰪥"
+      ],
+      "interval": 1,
+      "max-length": 10,
+      "rotate": 270
+    },
+    "modules-left": [
+      "hyprland/workspaces",
+      "custom/arrow",
+      "hyprland/window"
+    ],
+    "modules-right": [
+      "group/expand",
+      "network",
+      "group/expand-3",
+      "upower",
+      "upower#headset",
+      "memory",
+      "cpu",
+      "clock"
+    ],
+    "network": {
+      "format-disconnected": " ",
+      "format-ethernet": "󰈀 ",
+      "format-icons": [
+        "󰤟 ",
+        "󰤢 ",
+        "󰤥 "
+      ],
+      "format-linked": "󰈀 {ifname} (No IP)",
+      "format-wifi": "{icon}",
+      "interval": 2,
+      "on-click": "nm-connection-editor",
+      "rotate": 0,
+      "tooltip": true,
+      "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+      "tooltip-format-disconnected": "Disconnected"
+    },
+    "pulseaudio": {
+      "format": "{icon}",
+      "format-icons": {
+        "car": "",
+        "default": [
+          "",
+          "",
+          ""
+        ],
+        "hands-free": "",
+        "headphone": "",
+        "headset": "",
+        "phone": "",
+        "portable": ""
+      },
+      "format-muted": "婢",
+      "rotate": 0,
+      "scroll-step": 5,
+      "tooltip-format": "{icon}   {desc} // {volume}%"
+    },
+    "pulseaudio/slider": {
+      "device": "pulseaudio",
+      "max": 100,
+      "min": 5,
+      "rotate": 0,
+      "scroll-step": 1
+    },
+    "tray": {
+      "icon-size": 16,
+      "rotate": 0,
+      "spacing": 3
+    },
+    "upower": {
+      "format": "󰁹 {percentage}",
+      "on-click-right": "pkill waybar & pkill .waybar-wrapped & hyprctl dispatch exec waybar",
+      "show-icon": false,
+      "tooltip": false
+    },
+    "upower#headset": {
+      "format": "  {percentage}",
+      "hide-if-empty": true,
+      "native-path": "/org/bluez/hci0/dev_F8_4E_17_BC_B6_66",
+      "show-icon": false,
+      "tooltip": false
+    }
+  }
+]

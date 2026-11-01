@@ -1,13 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.dux-shell = {
-    services.power-profiles-daemon.enable = true;
-    services.accounts-daemon.enable = true;
-    services.geoclue2.enable = true;
-    security.polkit.enable = true;
-  };
-
-  flake.modules.homeManager.dux-shell =
+  flake.modules.nixos.dux-shell =
     { pkgs, ... }:
     let
       baseDmsPkg = (inputs.dms.lib.buildDmsPkgs pkgs).dms-shell;
@@ -356,7 +349,7 @@
       });
     in
     {
-      imports = [ inputs.dms.homeModules.dank-material-shell ];
+      imports = [ inputs.dms.nixosModules.dank-material-shell ];
 
       programs.dank-material-shell = {
         enable = true;
@@ -375,7 +368,7 @@
         enableCalendarEvents = true;
       };
 
-      systemd.user.services.dms.Service.Environment = [
+      systemd.user.services.dms.serviceConfig.Environment = [
         "DMS_HIDE_TRAYIDS=spotify-client,spotify"
       ];
     };

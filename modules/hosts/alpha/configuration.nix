@@ -18,14 +18,7 @@ in
     modules =
       (attrValues config.flake.modules.nixos)
       ++ [
-        inputs.home-manager.nixosModules.home-manager
         inputs.nur.modules.nixos.default
-        {
-          home-manager.extraSpecialArgs = specialArgs;
-          home-manager.users.theo = {
-            imports = attrValues config.flake.modules.homeManager;
-          };
-        }
       ];
   };
 }

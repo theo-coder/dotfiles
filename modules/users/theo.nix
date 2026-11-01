@@ -4,46 +4,41 @@ let
   repoDir = "${homeDir}/nixos";
 in
 {
-  flake.modules.nixos.user-theo = {
-    users.users.${userName} = {
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "video"
-        "docker"
-        "greeter"
-      ];
-    };
-  };
-
-  flake.modules.homeManager.user-theo =
-    { config, ... }:
+  flake.modules.nixos.user-theo =
+    { pkgs, ... }:
     {
-      home = {
-        username = userName;
-        homeDirectory = homeDir;
-        stateVersion = "26.11";
-
-        file.".local/bin".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/configs/bin";
-        file.".local/lib".source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/configs/lib";
-        file.".config/electron-flags.conf".text = ''
-          --enable-features=UseOzonePlatform
-          --ozone-platform=wayland
-        '';
-        file.".config/wpaperd/config.toml".text = ''
-          [default]
-          mode = "center"
-          path = "${homeDir}/Images/wallpapers/landscape/"
-        '';
+      users.users.${userName} = {
+        isNormalUser = true;
+        extraGroups = [
+          "wheel"
+          "video"
+          "docker"
+          "greeter"
+        ];
       };
 
-      programs.home-manager.enable = true;
+      environment.systemPackages = [ pkgs.stow ];
 
-      services.kdeconnect = {
-        enable = true;
-        indicator = false;
+      system.activationScripts.stowUserConfigs = {
+        deps = [ "users" ];
+        text = ''
+          if [ -d "${repoDir}/configs" ]; then
+            ${pkgs.sudo}/bin/sudo -u ${userName} ${pkgs.bash}/bin/bash -c '
+              # Remove any leftover symlinks pointing to home-manager-files
+              for dir in "${homeDir}/.config" "${homeDir}/.local" "${homeDir}/.icons" "${homeDir}/.themes"; do
+                if [ -d "$dir" ]; then
+                  ${pkgs.findutils}/bin/find "$dir" -type l -lname "*-home-manager-files*" -delete 2>/dev/null || true
+                fi
+              done
+              for f in "${homeDir}/.gtkrc-2.0" "${homeDir}/.manpath" "${homeDir}/.Xresources" "${homeDir}/.config/systemd/user/dms.service" "${homeDir}/.config/systemd/user/niri.service.wants/dms.service"; do
+                if [ -e "$f" ] || [ -L "$f" ]; then rm -f "$f"; fi
+              done
+
+              mkdir -p "${homeDir}/.config" "${homeDir}/.local/share/applications"
+              ${pkgs.stow}/bin/stow --no-folding -R -d "${repoDir}" -t "${homeDir}" configs
+            '
+          fi
+        '';
       };
-
-      systemd.user.startServices = "sd-switch";
     };
 }

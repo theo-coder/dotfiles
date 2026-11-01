@@ -1,36 +1,22 @@
 { ... }:
 {
-  flake.modules.homeManager.git =
+  flake.modules.nixos.git =
     { secrets, ... }:
     {
-      programs.git = {
-        enable = true;
+      programs.git.enable = true;
 
-        settings = {
-          user = {
-            inherit (secrets.git) name email;
-            signingKey = "~/.ssh/id_ed25519.pub";
-          };
-
-          init.defaultBranch = "main";
-          diff.colorMoved = "zebra";
-          fetch.prune = true;
-          pull.rebase = true;
-          rebase.autoStash = true;
-          gpg.format = "ssh";
-          commit.gpgsign = true;
-          tag.gpgsign = true;
-          "gpg \"ssh\"" = {
-            allowSignersFile = "~/.ssh/allowed_signers";
-          };
-        };
-
-        includes = [
-          {
-            condition = "gitdir:~/workspace/idfr/";
-            path = "~/workspace/idfr/.gitconfig";
-          }
-        ];
+      system.activationScripts.gitLocalConfig = {
+        deps = [ "users" ];
+        text = ''
+          mkdir -p /home/theo/.config/git
+          cat << 'EOF' > /home/theo/.config/git/config.local
+          [user]
+          	name = ${secrets.git.name}
+          	email = ${secrets.git.email}
+          EOF
+          chown -R theo:users /home/theo/.config/git
+          chmod 600 /home/theo/.config/git/config.local
+        '';
       };
     };
 }

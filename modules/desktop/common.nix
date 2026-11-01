@@ -55,6 +55,7 @@
       ];
 
       environment.variables.XDG_RUNTIME_DIR = "/run/user/$UID";
+      environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
       services.gnome.gnome-keyring.enable = true;
       services.flatpak.enable = true;
@@ -117,24 +118,5 @@
           libva
         ];
       };
-    };
-
-  flake.modules.homeManager.desktop-common =
-    {
-      config,
-      lib,
-      ...
-    }:
-    {
-      home.sessionVariables = {
-        NIXOS_OZONE_WL = "1";
-      };
-
-      xdg.dataFile = lib.mapAttrs' (
-        name: _:
-        lib.nameValuePair "applications/${name}" {
-          source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/configs/applications/${name}";
-        }
-      ) (builtins.readDir ../../configs/applications);
     };
 }

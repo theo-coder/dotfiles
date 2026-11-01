@@ -1,9 +1,10 @@
 { ... }:
 {
-  flake.modules.homeManager.nvim =
-    { config, ... }:
+  flake.modules.nixos.nvim =
+    { pkgs, ... }:
     {
-      home.file."${config.home.homeDirectory}/.config/nvim".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/configs/nvim";
+      environment.systemPackages = with pkgs; [
+        neovim
+      ];
     };
 }

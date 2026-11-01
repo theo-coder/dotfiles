@@ -5,6 +5,12 @@
     {
       imports = [ inputs.stylix.nixosModules.stylix ];
 
+      environment.systemPackages = with pkgs; [
+        papirus-icon-theme
+        adw-gtk3
+        numix-cursor-theme
+      ];
+
       fonts.packages = with pkgs; [
         nerd-fonts.fira-code
         nerd-fonts.jetbrains-mono
@@ -51,26 +57,6 @@
           name = "Numix-Cursor";
           package = pkgs.numix-cursor-theme;
           size = 35;
-        };
-      };
-    };
-
-  flake.modules.homeManager.stylix =
-    {
-      pkgs,
-      lib,
-      ...
-    }:
-    {
-      stylix.targets.dank-material-shell.enable = false;
-
-      fonts.fontconfig.enable = true;
-
-      gtk = {
-        enable = true;
-        iconTheme = {
-          name = lib.mkForce "Papirus-Dark";
-          package = lib.mkForce pkgs.papirus-icon-theme;
         };
       };
     };
