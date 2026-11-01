@@ -1,5 +1,5 @@
 local browser = "zen"
-local fileManager = "pcmanfm"
+local fileManager = "thunar"
 local menu = "~/.local/bin/applauncher"
 local mod = "SUPER"
 local terminal = "kitty"
@@ -183,8 +183,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("poweralertd &")
-  hl.exec_cmd("clipse -listen")
   hl.exec_cmd("waybar &")
   hl.exec_cmd("hypridle")
   hl.exec_cmd("appimage-run /home/theo/Applications/Handy_0.9.6_amd64.AppImage --start-hidden")

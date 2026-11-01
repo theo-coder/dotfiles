@@ -5,18 +5,8 @@
     {
       environment.systemPackages = with pkgs; [
         wayland
-        wlr-randr
-        wdisplays
         wl-clipboard
-        wl-clip-persist
-        clipse
-        slurp
-        grim
-        satty
-        wpaperd
-        poweralertd
         libnotify
-        rofi
         brightnessctl
         ddcutil
         wtype
@@ -26,19 +16,15 @@
         xdg-user-dirs
         glib
         gvfs
-        pcmanfm
         thunar
         tumbler
         ffmpegthumbnailer
         thunar-archive-plugin
         spotify
         thunderbird
-        ncspot
         gimp
         gthumb
-        mpv
         vlc
-        libreoffice-qt
         onlyoffice-desktopeditors
         mattermost-desktop
         obsidian

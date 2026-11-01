@@ -8,7 +8,6 @@
       environment.systemPackages = with pkgs; [
         devenv
         lazygit
-        neovim
         gcc
         gnumake
         go
@@ -18,8 +17,6 @@
         stylua
         tree-sitter
         python3
-        pyenv
-        uv
         pyright
         ruby
         nodejs
@@ -43,9 +40,6 @@
         android-tools
         jdk
         sqlite
-        sqlitebrowser
-        code-cursor
-        vscode
         zed-editor
         postman
         beekeeper-studio

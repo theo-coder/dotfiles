@@ -119,13 +119,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id="clipse"
-    open-floating true
-    default-column-width { fixed 800; }
-    default-window-height { fixed 650; }
-}
-
-window-rule {
     match title="^Opération sur des fichiers en cours$"
     open-floating true
 }

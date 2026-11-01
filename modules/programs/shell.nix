@@ -40,7 +40,6 @@
         eza
         keychain
         zoxide
-        fira-code
         pass
         gnupg
         pinentry-tty

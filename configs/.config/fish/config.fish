@@ -1,7 +1,6 @@
 status is-interactive; and begin
     set fish_greeting
-    set -Ux PYENV_ROOT $HOME/.pyenv
-    set -U fish_user_paths $PYENV_ROOT/bin $HOME/go/bin $HOME/.pixi/bin $fish_user_paths
+    set -U fish_user_paths $HOME/go/bin $HOME/.pixi/bin $fish_user_paths
     set TERM "xterm-256color"
     set -gx DIRENV_LOG_FORMAT ""
     set -gx FZF_DEFAULT_COMMAND "rg --files --hidden"
@@ -62,7 +61,6 @@ status is-interactive; and begin
     alias df 'df -h'
     alias free 'free -m'
     alias jctl 'journalctl -p 3 -xb'
-    alias mpv 'mpv --hwdec=vaapi'
     alias tb 'nc termbin.com 9999'
     alias myip 'curl ipinfo.io'
 
@@ -84,9 +82,6 @@ status is-interactive; and begin
 
     if command -q fzf
         fzf --fish | source
-    end
-    if command -q pyenv
-        pyenv init - fish | source
     end
     if command -q zoxide
         zoxide init fish | source
