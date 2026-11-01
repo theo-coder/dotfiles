@@ -3,6 +3,7 @@ local opts = {
 	silent = true,
 }
 
+vim.keymap.set({ "n" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set({ "n" }, "J", "mzJ`z", opts) -- merge next line with current
 vim.keymap.set({ "n" }, "<C-d>", "<C-d>zz", opts) -- center cursor line when going up
 vim.keymap.set({ "n" }, "<C-u>", "<C-u>zz", opts) -- center cursor line when going down

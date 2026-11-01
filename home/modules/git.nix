@@ -1,10 +1,12 @@
-{...}: {
+{secrets, ...}: {
   programs.git = {
     enable = true;
-    userName = "Théo Posty";
-    userEmail = "theo@posty.fr";
 
-    extraConfig = {
+    settings = {
+      user = {
+        inherit (secrets.git) name email;
+      };
+
       init.defaultBranch = "main";
       user.signingKey = "~/.ssh/id_ed25519.pub";
       diff.colorMoved = "zebra";
@@ -17,9 +19,12 @@
       "gpg \"ssh\"" = {
         allowSignersFile = "~/.ssh/allowed_signers";
       };
-      "includeIf \"gitdir:~/workspace/idfr/\"" = {
-        path = "~/workspace/idfr/.gitconfig";
-      };
     };
+    includes = [
+      {
+        condition = "gitdir:~/workspace/idfr/";
+        path = "~/workspace/idfr/.gitconfig";
+      }
+    ];
   };
 }

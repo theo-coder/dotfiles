@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./cli.nix
     ./kitty.nix
@@ -29,6 +33,11 @@
   };
 
   programs.home-manager.enable = true;
+
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 
   systemd.user.startServices = "sd-switch";
 }

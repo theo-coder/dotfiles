@@ -12,7 +12,7 @@ return {
 		vim.keymap.set("n", "<leader>tp", function()
 			todo_comments.jump_prev()
 		end)
-		vim.keymap.set("n", "<leader>pt", "<cmd>TodoTelescope<cr>")
+		vim.keymap.set("n", "<leader>pt", "<cmd>TodoFzfLua<cr>")
 
 		todo_comments.setup({})
 	end,

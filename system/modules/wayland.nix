@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     wl-clipboard
     glib
@@ -15,6 +16,7 @@
     hypridle
     poweralertd
     hyprlock
+    hyprpicker
     faac
     faad2
     glib
@@ -22,37 +24,44 @@
   ];
 
   nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        user = "theo";
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd 'bash -l -c start-hyprland'";
       };
     };
   };
 
+  environment.variables.XDG_RUNTIME_DIR = "/run/user/$UID";
+
   services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.default;
-    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
+    wlr.enable = true;
     config = {
-      common.default = ["gtk"];
-      hyprland.default = ["gtk" "hyprland"];
+      common.default = [ "gtk" ];
+      hyprland.default = [
+        "gtk"
+        "hyprland"
+      ];
     };
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   hardware.graphics = {
@@ -62,14 +71,12 @@
       mesa
       libva
       libva-utils
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
-      amdvlk
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
       mesa
       libva
-      amdvlk
     ];
   };
 }

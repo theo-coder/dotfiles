@@ -1,0 +1,16 @@
+# Nix build artifacts
+result
+result-*
+
+# Home-manager & backup files
+*.bak
+*.backup
+
+# Local secrets (non-tracked)
+secrets.nix
+secrets/
+*.secret
+.env
+
+# Direnv
+.direnv/

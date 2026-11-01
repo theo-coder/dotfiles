@@ -1,18 +1,18 @@
 return {
-	"iamcco/markdown-preview.nvim",
-	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+	'plasticboy/vim-markdown',
 	ft = { "markdown" },
-	build = function(plugin)
-		if vim.fn.executable("npx") then
-			vim.cmd("!cd " .. plugin.dir .. " && cd app && npx --yes yarn install")
-		else
-			vim.cmd([[Lazy load markdown-preview.nvim]])
-			vim.fn["mkdp#util#install"]()
-		end
-	end,
-	init = function()
-		if vim.fn.executable("npx") then
-			vim.g.mkdp_filetypes = { "markdown" }
-		end
-	end,
+	dependencies = {
+		'godlygeek/tabular',
+	},
+	config = function()
+		-- never ever fold!
+		vim.g.vim_markdown_folding_disabled = 1
+		-- support front-matter in .md files
+		vim.g.vim_markdown_frontmatter = 1
+		-- 'o' on a list item should insert at same level
+		vim.g.vim_markdown_new_list_item_indent = 0
+		-- don't add bullets when wrapping:
+		-- https://github.com/preservim/vim-markdown/issues/232
+		vim.g.vim_markdown_auto_insert_bullets = 0
+	end
 }

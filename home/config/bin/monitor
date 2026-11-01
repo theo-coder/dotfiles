@@ -20,7 +20,8 @@ setup() {
 
     if [ "$1" == "internal" ]; then
         for name in $(hyprctl monitors -j | jq .[].name | tr -d '"' | grep -v "eDP-1"); do
-            hyprctl keyword monitor "$name, disable" > /dev/null
+            # hyprctl keyword monitor "$name, disable" > /dev/null
+            hyprctl eval "hl.monitor({ output = \"$name\", disabled = true })"
         done
     fi
 
@@ -33,7 +34,8 @@ setup() {
         port=$(echo "$serial" | xargs -I % sh -c "hyprctl monitors all -j | jq -r '.[] | select(.serial == \"%\") | .name'")
 
         if [ ! -z "$port" ]; then
-            hyprctl keyword monitor "$port,$resolution,$position,$zoom" > /dev/null
+            # hyprctl keyword monitor "$port,$resolution,$position,$zoom" > /dev/null
+            hyprctl eval "hl.monitor({ output = \"$port\", mode = \"$resolution\", position = \"$position\", scale = \"$zoom\" })"
         fi
     done
 

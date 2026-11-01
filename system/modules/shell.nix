@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  secrets,
+  ...
+}: {
   users.defaultUserShell = pkgs.fish;
   environment.shells = with pkgs; [fish];
   environment.variables = {
@@ -14,6 +18,11 @@
     XDG_STATE_HOME = "$HOME/.local/state";
     XDG_BIN_HOME = "$HOME/.local/bin";
     PATH = ["${XDG_BIN_HOME}" "$HOME/.cargo/bin"];
+    OPENAI_BASE_URL = secrets.openai.baseUrl;
+    OPENAI_API_KEY = secrets.openai.apiKey;
+    OPENAI_MODEL = secrets.openai.model;
+    CHROME_ALLOCATOR = "ANON";
+    PASSWORD_STORE = "gnome-libsecret";
   };
 
   environment.systemPackages = with pkgs; [
@@ -32,6 +41,7 @@
     systemctl-tui
     chafa
     direnv
+    nix-direnv
   ];
 
   programs.fish.enable = true;

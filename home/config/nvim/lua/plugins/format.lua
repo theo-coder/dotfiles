@@ -1,6 +1,6 @@
 return {
-	"stevearc/conform.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+ 	"stevearc/conform.nvim",
+ 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local conform = require("conform")
 		local format_options = { lsp_fallback = true, async = false, timeout = 500 }

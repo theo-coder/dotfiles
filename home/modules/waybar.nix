@@ -4,7 +4,7 @@
     settings.mainBar = lib.mkForce {
       height = 16;
       modules-left = [
-        "image#nix-ico"
+        # "image#nix-ico"
         "hyprland/workspaces"
         "custom/arrow"
         "hyprland/window"

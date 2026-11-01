@@ -1,3 +1,26 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-grim -g "$(slurp)" - | wl-copy
+set -o errexit
+set -o pipefail
+set -o nounset
+
+MODE="${1:-region}"
+
+case "${MODE}" in
+region)
+  grim -g "$(slurp -d)" -
+  ;;
+window)
+  grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" -
+  ;;
+monitor-focused)
+  grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" -
+  ;;
+monitor-all)
+  grim -
+  ;;
+*)
+  echo "'${MODE}' is not a supported, aborting!" >&2
+  exit 1
+  ;;
+esac | satty --filename - --output-filename "$(xdg-user-dir)/Images/captures/screenshot-$(date +'%Y%m%d-%H%M%S').png"

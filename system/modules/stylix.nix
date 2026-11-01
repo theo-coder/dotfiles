@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [inputs.stylix.nixosModules.stylix];
+  stylix.targets.kmscon.enable = false;
   stylix = {
     enable = true;
     base16Scheme = let
@@ -29,7 +30,7 @@
       };
 
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
 

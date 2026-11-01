@@ -1,5 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}:
+{
   environment.systemPackages = with pkgs; [
+    devenv
+    lazygit
     neovim
     gcc
     gnumake
@@ -32,16 +39,15 @@
     sqlite
     sqlitebrowser
     code-cursor
-    jmtpfs
     android-tools
     vscode
     k3sup
     kubectl
     kubernetes-helm
     kustomize
+    postgresql
+    uv
   ];
-
-  programs.adb.enable = true;
 
   environment.variables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";

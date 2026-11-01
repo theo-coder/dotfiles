@@ -43,5 +43,22 @@
         "zoom": "1"
       }
     ]
+  },
+  {
+    "name": "portable",
+    "monitors": [
+      {
+        "serial": "",
+        "resolution": "2880x1920@120.00Hz",
+        "position": "0x0",
+        "zoom": "1.5"
+      },
+      {
+        "serial": "LBLMTF122035",
+        "resolution": "1920x1080",
+        "position": "-1920x0",
+        "zoom": "1"
+      }
+    ]
   }
 ]

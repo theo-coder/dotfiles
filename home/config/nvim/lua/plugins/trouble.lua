@@ -4,7 +4,7 @@ return {
 	cmd = "Trouble",
 	keys = {
 		{
-			"<leader>tt",
+			"<leader>sd",
 			"<cmd>Trouble diagnostics toggle<cr>",
 			desc = "Diagnostics (Trouble)",
 		},

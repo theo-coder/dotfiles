@@ -1,4 +1,4 @@
-{...}: {
+{ pkgs, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   imports = [
@@ -28,4 +28,6 @@
 
   services.dbus.enable = true;
   services.upower.enable = true;
+  services.udev.packages = [ pkgs.ddcutil ];
+  hardware.i2c.enable = true;
 }

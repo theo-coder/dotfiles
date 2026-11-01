@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   config = {
     home.file.".config/fish/functions".source = ../config/fish/functions;
 
@@ -7,8 +7,9 @@
       interactiveShellInit = ''
         set fish_greeting # suppress fish's intro message
         set -Ux PYENV_ROOT $HOME/.pyenv
-        set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+        set -U fish_user_paths $PYENV_ROOT/bin $HOME/go/bin $HOME/.pixi/bin $fish_user_paths
         set TERM "xterm-256color"
+        set -gx DIRENV_LOG_FORMAT ""
 
         function fish_user_key_bindings
             fish_vi_key_bindings

@@ -18,14 +18,14 @@
           at-spi2-atk
           libdrm
           expat
-          xorg.libxcb
+          libxcb
           libxkbcommon
-          xorg.libX11
-          xorg.libXcomposite
-          xorg.libXdamage
-          xorg.libXext
-          xorg.libXfixes
-          xorg.libXrandr
+          libx11
+          libxcomposite
+          libxdamage
+          libxext
+          libxfixes
+          libxrandr
           gtk3
           pango
           cairo
@@ -33,7 +33,7 @@
           dbus
           at-spi2-core
           cups
-          xorg.libxshmfence
+          libxshmfence
 
           # Additional common dependencies for Minecraft
           mesa
