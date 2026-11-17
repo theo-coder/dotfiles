@@ -45,8 +45,6 @@
           }' "$productJson" > "$productJson.tmp" && mv "$productJson.tmp" "$productJson"
         '';
       }))
-
-      inputs.cursor.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     environment.variables.XDG_RUNTIME_DIR = "/run/user/$UID";
